@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eon", "Eon\Eon.csproj", "{F98E97D3-7A26-46CA-BE75-580CE59CD60C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eon.Docs", "Eon.Docs\Eon.Docs.csproj", "{99034F10-9262-4475-A5B7-12458ABEA05C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eon.Tests", "Eon.Tests\Eon.Tests.csproj", "{CD1B367D-216A-48C4-8857-FD8DC21836A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F98E97D3-7A26-46CA-BE75-580CE59CD60C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F98E97D3-7A26-46CA-BE75-580CE59CD60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F98E97D3-7A26-46CA-BE75-580CE59CD60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F98E97D3-7A26-46CA-BE75-580CE59CD60C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99034F10-9262-4475-A5B7-12458ABEA05C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99034F10-9262-4475-A5B7-12458ABEA05C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99034F10-9262-4475-A5B7-12458ABEA05C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99034F10-9262-4475-A5B7-12458ABEA05C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1B367D-216A-48C4-8857-FD8DC21836A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1B367D-216A-48C4-8857-FD8DC21836A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1B367D-216A-48C4-8857-FD8DC21836A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1B367D-216A-48C4-8857-FD8DC21836A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

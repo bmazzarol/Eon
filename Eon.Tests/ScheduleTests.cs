@@ -6,11 +6,6 @@ public static class ScheduleTests
     public static void Case1()
     {
         var schedule = Schedule.Forever;
-        schedule
-            .AsEnumerable()
-            .Take(50)
-            .Should()
-            .HaveCount(50)
-            .And.OnlyContain(x => x == Duration.Zero);
+        schedule.Take(50).Should().HaveCount(50).And.OnlyContain(x => x == Duration.Zero);
     }
 }

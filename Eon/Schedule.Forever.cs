@@ -11,7 +11,7 @@ public abstract partial record Schedule
     public static readonly Schedule Forever = new SchForever(Duration.Zero);
 
     /// <summary>
-    /// <see cref="Schedule"/> that runs once
+    /// <see cref="Schedule"/> that runs once returning <see cref="Duration.Zero"/>
     /// </summary>
     public static readonly Schedule Once = Forever.Take(1);
 

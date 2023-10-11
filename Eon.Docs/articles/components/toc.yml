@@ -11,3 +11,5 @@
     href: from.md
   - name: Linear
     href: linear.md
+  - name: Union (|)
+    href: union.md

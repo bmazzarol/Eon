@@ -7,9 +7,12 @@ namespace Eon;
 /// Period of time (duration) in milliseconds.
 /// It differs from <see cref="TimeSpan"/> in that it can never be negative
 /// </summary>
-public readonly record struct Duration : IComparable<Duration>
+public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
 {
-    private readonly double _milliseconds;
+    /// <summary>
+    /// Number of milliseconds the duration constitutes
+    /// </summary>
+    public readonly double Milliseconds;
 
     /// <summary>
     /// Duration constructor
@@ -25,7 +28,7 @@ public readonly record struct Duration : IComparable<Duration>
                 nameof(milliseconds)
             );
         }
-        _milliseconds = milliseconds;
+        Milliseconds = milliseconds;
     }
 
     /// <summary>
@@ -55,7 +58,7 @@ public readonly record struct Duration : IComparable<Duration>
     /// <param name="duration">duration</param>
     /// <returns>milliseconds</returns>
     [Pure]
-    public static implicit operator double(in Duration duration) => duration._milliseconds;
+    public static implicit operator double(in Duration duration) => duration.Milliseconds;
 
     /// <summary>
     /// Converts a <see cref="Duration"/> to a <see cref="TimeSpan"/>
@@ -64,7 +67,7 @@ public readonly record struct Duration : IComparable<Duration>
     /// <returns>timespan</returns>
     [Pure]
     public static explicit operator TimeSpan(in Duration duration) =>
-        TimeSpan.FromMilliseconds(duration._milliseconds);
+        TimeSpan.FromMilliseconds(duration.Milliseconds);
 
     /// <summary>
     /// Compares this instance to a specified <see cref="Duration"/> and returns
@@ -74,7 +77,7 @@ public readonly record struct Duration : IComparable<Duration>
     /// <param name="other">other <see cref="Duration"/></param>
     /// <returns>integer which is either less than 0, 0 or greater than 0</returns>
     [Pure]
-    private int CompareToInternal(in Duration other) => _milliseconds.CompareTo(other);
+    private int CompareToInternal(in Duration other) => Milliseconds.CompareTo(other);
 
     /// <inheritdoc />
     [Pure]
@@ -121,11 +124,44 @@ public readonly record struct Duration : IComparable<Duration>
         first.CompareToInternal(second) <= 0;
 
     /// <summary>
+    /// Returns true if the `first` <see cref="Duration"/> equals the `second` <see cref="Duration"/>
+    /// </summary>
+    /// <param name="first">first <see cref="Duration"/></param>
+    /// <param name="second">second <see cref="Duration"/></param>
+    /// <returns>true if the `first` is equal to the `second`</returns>
+    [Pure]
+    public static bool operator ==(Duration first, Duration second) =>
+        first.Milliseconds.Equals(second.Milliseconds);
+
+    /// <summary>
+    /// Returns true if the `first` <see cref="Duration"/> does not equal the `second` <see cref="Duration"/>
+    /// </summary>
+    /// <param name="first">first <see cref="Duration"/></param>
+    /// <param name="second">second <see cref="Duration"/></param>
+    /// <returns>true if the `first` is not equal to the `second`</returns>
+    [Pure]
+    public static bool operator !=(Duration first, Duration second) =>
+        !first.Milliseconds.Equals(second.Milliseconds);
+
+    /// <inheritdoc />
+    [Pure]
+    public bool Equals(Duration other) => Milliseconds.Equals(other);
+
+    /// <inheritdoc />
+    [Pure]
+    public override bool Equals(object? obj) => obj is Duration other && Equals(other);
+
+    /// <inheritdoc />
+    [Pure]
+    public override int GetHashCode() => Milliseconds.GetHashCode();
+
+    /// <summary>
     /// Exposes an awaiter from <see cref="Task.Delay(int)"/> to allow direct await on a <see cref="Duration"/>
     /// </summary>
     /// <returns><see cref="Task.Delay(int)"/> awaiter</returns>
-    public TaskAwaiter GetAwaiter() => Task.Delay((int)_milliseconds).GetAwaiter();
+    public TaskAwaiter GetAwaiter() => Task.Delay((int)Milliseconds).GetAwaiter();
 
     /// <inheritdoc />
-    public override string ToString() => ((TimeSpan)this).ToString();
+    [Pure]
+    public override string ToString() => $"{nameof(Duration)}({(TimeSpan)this})";
 }

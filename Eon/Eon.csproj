@@ -10,8 +10,8 @@
         <Title>Eon</Title>
         <Description>Simple Schedule builder</Description>
         <PackageTags>C#, Schedule</PackageTags>
-        <PackageProjectUrl>https://bmazzarol.github.io/Schedule.BuildR</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/bmazzarol/Schedule.BuildR</RepositoryUrl>
+        <PackageProjectUrl>https://bmazzarol.github.io/Eon</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/bmazzarol/Eon</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Copyright>Copyright (c) Ben Mazzarol. All rights reserved.</Copyright>
         <ProjectGuid>6c1d4fd7-fb66-4192-8c0f-d514fe0d5a20</ProjectGuid>

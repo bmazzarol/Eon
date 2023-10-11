@@ -15,3 +15,5 @@
     href: union.md
   - name: Intersect (&)
     href: intersect.md
+  - name: Append (+)
+    href: append.md

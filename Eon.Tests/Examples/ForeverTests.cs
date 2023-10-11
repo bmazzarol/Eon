@@ -8,7 +8,7 @@ public static class ForeverTests
         #region Example1
         var count = 0;
         // Forever be used as a looping construct
-        foreach (var duration in Schedule.Forever)
+        foreach (Duration duration in Schedule.Forever)
         {
             duration.Should().Be(Duration.Zero);
             count++;
@@ -27,7 +27,7 @@ public static class ForeverTests
         #region Example2
 
         Schedule forever = Schedule.Forever;
-        var result = forever.Take(10);
+        Schedule result = forever.Take(10);
 
         result.Should().HaveCount(10).And.OnlyContain(x => x == Duration.Zero);
 

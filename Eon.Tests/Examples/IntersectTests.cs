@@ -67,15 +67,15 @@ public static class IntersectTests
     public static void Case4()
     {
         #region Example4
-        Schedule union1 =
+        Schedule intersect1 =
             Schedule.Spaced(TimeSpan.FromSeconds(4)).Take(4) & Schedule.NoDelayOnFirst;
 
-        union1.Should().HaveCount(4).And.ContainInOrder(Duration.Zero, TimeSpan.FromSeconds(4));
+        intersect1.Should().HaveCount(4).And.ContainInOrder(Duration.Zero, TimeSpan.FromSeconds(4));
 
-        Schedule union2 =
+        Schedule intersect2 =
             Schedule.NoDelayOnFirst & Schedule.Linear(TimeSpan.FromSeconds(1)).Take(4);
 
-        union2
+        intersect2
             .Should()
             .HaveCount(4)
             .And.ContainInOrder(Duration.Zero, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(3));

@@ -2,7 +2,7 @@
     iconLinks: [
         {
             icon: 'github',
-            href: 'https://github.com/bmazzarol/Http-BuildR',
+            href: 'https://github.com/bmazzarol/Eon',
             title: 'GitHub'
         }
     ]

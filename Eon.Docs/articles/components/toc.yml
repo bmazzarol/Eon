@@ -13,3 +13,5 @@
     href: linear.md
   - name: Union (|)
     href: union.md
+  - name: Intersect (&)
+    href: intersect.md

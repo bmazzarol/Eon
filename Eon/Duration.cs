@@ -125,4 +125,7 @@ public readonly record struct Duration : IComparable<Duration>
     /// </summary>
     /// <returns><see cref="Task.Delay(int)"/> awaiter</returns>
     public TaskAwaiter GetAwaiter() => Task.Delay((int)_milliseconds).GetAwaiter();
+
+    /// <inheritdoc />
+    public override string ToString() => ((TimeSpan)this).ToString();
 }

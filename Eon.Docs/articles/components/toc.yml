@@ -17,3 +17,5 @@
     href: intersect.md
   - name: Append (+)
     href: append.md
+  - name: Interleave
+    href: interleave.md

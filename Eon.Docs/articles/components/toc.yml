@@ -33,3 +33,5 @@
     href: fibonacci.md
   - name: Exponential
     href: exponential.md
+  - name: Repeat Forever
+    href: repeat-forever.md

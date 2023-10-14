@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 
 namespace Eon;
@@ -15,6 +16,7 @@ public abstract partial record Schedule : IEnumerable<Duration>
     [Pure]
     public abstract IEnumerator<Duration> GetEnumerator();
 
+    [ExcludeFromCodeCoverage]
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();

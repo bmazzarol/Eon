@@ -1,6 +1,8 @@
 ﻿items:
   - name: Forever
     href: forever.md
+  - name: Take
+    href: take.md
   - name: Once
     href: once.md
   - name: Spaced

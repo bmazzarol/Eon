@@ -3,6 +3,8 @@
     href: forever.md
   - name: Take
     href: take.md
+  - name: Skip
+    href: skip.md
   - name: Once
     href: once.md
   - name: Spaced

@@ -5,9 +5,19 @@ namespace Eon;
 /// <summary>
 /// Transforms a <see cref="Schedule"/> into another <see cref="Schedule"/>
 /// </summary>
-/// <param name="Map">map function</param>
-public readonly record struct ScheduleTransformer(Func<Schedule, Schedule> Map)
+public readonly struct ScheduleTransformer
 {
+    private readonly Func<Schedule, Schedule> _map;
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="map">map function</param>
+    public ScheduleTransformer(Func<Schedule, Schedule> map)
+    {
+        _map = map;
+    }
+
     /// <summary>
     /// Apply a schedule to the transformer
     /// </summary>
@@ -15,7 +25,7 @@ public readonly record struct ScheduleTransformer(Func<Schedule, Schedule> Map)
     /// <returns>`Schedule` that has been run through the transformer</returns>
     public Schedule Apply(Schedule schedule)
     {
-        return Map.Invoke(schedule) ?? schedule;
+        return _map.Invoke(schedule) ?? schedule;
     }
 
     /// <summary>

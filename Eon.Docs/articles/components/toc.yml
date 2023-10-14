@@ -25,3 +25,5 @@
     href: select.md
   - name: SelectMany
     href: select-many.md
+  - name: Fibonacci
+    href: fibonacci.md

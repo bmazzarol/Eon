@@ -6,12 +6,12 @@ public static class WhereTests
     public static void Case1()
     {
         #region Example1
-        Schedule interleave = Schedule
+        Schedule where = Schedule
             .Linear(TimeSpan.FromSeconds(1))
             .Take(8)
             .Where(x => ((TimeSpan)x).Seconds % 2 == 0);
 
-        using var enumerator = interleave.GetEnumerator();
+        using var enumerator = where.GetEnumerator();
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
         enumerator.MoveNext().Should().BeTrue();

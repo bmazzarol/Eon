@@ -6,9 +6,9 @@ public static class SelectTests
     public static void Case1()
     {
         #region Example1
-        Schedule interleave = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(4).Select(x => x + x);
+        Schedule select = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(4).Select(x => x + x);
 
-        using var enumerator = interleave.GetEnumerator();
+        using var enumerator = select.GetEnumerator();
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
         enumerator.MoveNext().Should().BeTrue();
@@ -26,12 +26,12 @@ public static class SelectTests
     public static void Case2()
     {
         #region Example2
-        Schedule interleave = Schedule
+        Schedule select = Schedule
             .Linear(TimeSpan.FromSeconds(1))
             .Take(4)
             .Select((x, i) => x + (Duration)TimeSpan.FromSeconds(i));
 
-        using var enumerator = interleave.GetEnumerator();
+        using var enumerator = select.GetEnumerator();
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
         enumerator.MoveNext().Should().BeTrue();

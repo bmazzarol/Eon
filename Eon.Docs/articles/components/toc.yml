@@ -23,3 +23,5 @@
     href: where.md
   - name: Select
     href: select.md
+  - name: SelectMany
+    href: select-many.md

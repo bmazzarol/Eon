@@ -27,3 +27,5 @@
     href: select-many.md
   - name: Fibonacci
     href: fibonacci.md
+  - name: Exponential
+    href: exponential.md

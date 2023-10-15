@@ -42,6 +42,12 @@ public abstract partial record Schedule
         Func<Duration, Duration, Duration> Projection
     ) : Schedule
     {
+        public override int? Count =>
+            !CanCount ? null : Schedule.Select(Bind).Sum(child => child.Count);
+
+        public override bool CanCount =>
+            Schedule.CanCount && Schedule.Select(Bind).All(child => child.CanCount);
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Schedule.GetEnumerator();

@@ -18,10 +18,19 @@ public abstract partial record Schedule
     /// If <see cref="Schedule"/> completes before <see cref="Count"/> emissions
     /// it completes
     /// </summary>
-    /// <param name="Schedule">schedule</param>
-    /// <param name="Count">number of elements to take</param>
-    private sealed record SchTake(Schedule Schedule, int Count) : Schedule
+    private sealed record SchTake : Schedule
     {
+        private Schedule Schedule { get; }
+        public override int? Count { get; }
+
+        public SchTake(Schedule Schedule, int Count)
+        {
+            this.Schedule = Schedule;
+            this.Count = Count;
+        }
+
+        public override bool CanCount => true;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Schedule.GetEnumerator();

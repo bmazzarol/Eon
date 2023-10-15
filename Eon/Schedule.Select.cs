@@ -29,6 +29,9 @@ public abstract partial record Schedule
     private sealed record SchSelect(Schedule Schedule, Func<Duration, Duration> Projection)
         : Schedule
     {
+        public override int? Count => Schedule.Count;
+        public override bool CanCount => Schedule.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Schedule.GetEnumerator();
@@ -49,6 +52,9 @@ public abstract partial record Schedule
         Func<Duration, int, Duration> Projection
     ) : Schedule
     {
+        public override int? Count => Schedule.Count;
+        public override bool CanCount => Schedule.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Schedule.GetEnumerator();

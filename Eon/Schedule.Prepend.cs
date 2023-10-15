@@ -19,6 +19,9 @@ public abstract partial record Schedule
     /// <param name="Right">right <see cref="Schedule"/> to prepend to</param>
     private sealed record SchPrepend(Duration Left, Schedule Right) : Schedule
     {
+        public override int? Count => Right.Count + 1;
+        public override bool CanCount => Right.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Right.GetEnumerator();

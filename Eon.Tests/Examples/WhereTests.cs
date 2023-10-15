@@ -22,6 +22,9 @@ public static class WhereTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(8));
         enumerator.MoveNext().Should().BeFalse();
 
+        where.CanCount.Should().BeTrue();
+        where.Count.Should().Be(4);
+
         #endregion
     }
 }

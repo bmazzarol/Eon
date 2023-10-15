@@ -15,6 +15,9 @@ public static class SkipTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(4));
         enumerator.MoveNext().Should().BeFalse();
 
+        skip.CanCount.Should().BeTrue();
+        skip.Count.Should().Be(2);
+
         #endregion
     }
 }

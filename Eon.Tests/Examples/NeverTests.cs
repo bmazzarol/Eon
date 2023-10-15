@@ -11,6 +11,9 @@ public static class NeverTests
         using var enumerator = never.GetEnumerator();
         enumerator.MoveNext().Should().BeFalse();
 
+        never.CanCount.Should().BeTrue();
+        never.Count.Should().Be(0);
+
         #endregion
     }
 }

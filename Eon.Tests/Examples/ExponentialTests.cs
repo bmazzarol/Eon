@@ -19,6 +19,9 @@ public static class ExponentialTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(8));
         enumerator.MoveNext().Should().BeFalse();
 
+        exponential.CanCount.Should().BeTrue();
+        exponential.Count.Should().Be(4);
+
         #endregion
     }
 
@@ -28,7 +31,8 @@ public static class ExponentialTests
     public static void Case2()
     {
         #region Example2
-        Schedule exponential = Schedule.Exponential(TimeSpan.FromSeconds(1), factor: 3).Take(4);
+
+        Schedule exponential = Schedule.Exponential(TimeSpan.FromSeconds(1), factor: 3);
 
         using var enumerator = exponential.GetEnumerator();
         enumerator.MoveNext().Should().BeTrue();
@@ -39,7 +43,9 @@ public static class ExponentialTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(5));
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(14));
-        enumerator.MoveNext().Should().BeFalse();
+
+        exponential.CanCount.Should().BeFalse();
+        exponential.Count.Should().BeNull();
 
         #endregion
     }

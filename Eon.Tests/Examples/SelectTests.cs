@@ -19,6 +19,9 @@ public static class SelectTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(8));
         enumerator.MoveNext().Should().BeFalse();
 
+        select.CanCount.Should().BeTrue();
+        select.Count.Should().Be(4);
+
         #endregion
     }
 
@@ -41,6 +44,9 @@ public static class SelectTests
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(7));
         enumerator.MoveNext().Should().BeFalse();
+
+        select.CanCount.Should().BeTrue();
+        select.Count.Should().Be(4);
 
         #endregion
     }

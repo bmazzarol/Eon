@@ -23,6 +23,9 @@ public abstract partial record Schedule
     /// <param name="Factor">factor to multiply by on each emission</param>
     private sealed record SchExponential(Duration Seed, double Factor) : Schedule
     {
+        public override int? Count => null;
+        public override bool CanCount => false;
+
         [SuppressMessage("Blocker Bug", "S2190:Loops and recursions should not be infinite")]
         public override IEnumerator<Duration> GetEnumerator()
         {

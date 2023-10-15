@@ -29,6 +29,9 @@ public static class ForeverTests
         Schedule forever = Schedule.Forever;
         Schedule result = forever.Take(10);
 
+        forever.CanCount.Should().BeFalse();
+        forever.Count.Should().BeNull();
+
         result.Should().HaveCount(10).And.OnlyContain(x => x == Duration.Zero);
 
         #endregion

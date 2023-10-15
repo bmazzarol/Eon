@@ -12,6 +12,9 @@ public abstract partial record Schedule
     /// </summary>
     private sealed record SchNever : Schedule
     {
+        public override int? Count => 0;
+        public override bool CanCount => true;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             yield break;

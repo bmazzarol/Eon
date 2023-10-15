@@ -20,6 +20,9 @@ public static class IntersectTests
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(4));
 
+        intersect.CanCount.Should().BeFalse();
+        intersect.Count.Should().BeNull();
+
         #endregion
     }
 
@@ -28,7 +31,7 @@ public static class IntersectTests
     {
         #region Example2
         Schedule intersect =
-            Schedule.Spaced(TimeSpan.FromSeconds(4))
+            Schedule.Spaced(TimeSpan.FromSeconds(4)).Take(4)
             & Schedule.Linear(TimeSpan.FromSeconds(1), factor: 2);
 
         using var enumerator = intersect.GetEnumerator();
@@ -40,6 +43,10 @@ public static class IntersectTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(5));
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(7));
+        enumerator.MoveNext().Should().BeFalse();
+
+        intersect.CanCount.Should().BeTrue();
+        intersect.Count.Should().Be(4);
 
         #endregion
     }
@@ -81,5 +88,32 @@ public static class IntersectTests
             .And.ContainInOrder(Duration.Zero, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(3));
 
         #endregion
+    }
+
+    [Fact(DisplayName = "Intersect can count is false if both schedules are infinite")]
+    public static void Case5()
+    {
+        var interleave = Schedule.Linear(TimeSpan.FromSeconds(1)).Intersect(Schedule.Forever);
+        interleave.CanCount.Should().BeFalse();
+        interleave.Count.Should().BeNull();
+    }
+
+    [Fact(DisplayName = "Intersect can count is true if either schedule are finite")]
+    public static void Case6()
+    {
+        var intersect = Schedule
+            .Linear(TimeSpan.FromSeconds(1))
+            .Intersect(Schedule.Forever.Take(2));
+        intersect.CanCount.Should().BeTrue();
+        intersect.Count.Should().Be(2);
+        intersect.AsEnumerable().Should().HaveCount(2);
+
+        intersect = Schedule
+            .Linear(TimeSpan.FromSeconds(1))
+            .Take(4)
+            .Intersect(Schedule.Forever.Take(2));
+        intersect.CanCount.Should().BeTrue();
+        intersect.Count.Should().Be(2);
+        intersect.AsEnumerable().Should().HaveCount(2);
     }
 }

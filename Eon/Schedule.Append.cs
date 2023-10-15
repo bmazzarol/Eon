@@ -27,8 +27,11 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="Left">left <see cref="Schedule"/></param>
     /// <param name="Right">right <see cref="Schedule"/></param>
-    internal record SchAppend(Schedule Left, Schedule Right) : Schedule
+    private sealed record SchAppend(Schedule Left, Schedule Right) : Schedule
     {
+        public override int? Count => Left.Count + Right.Count;
+        public override bool CanCount => Left.CanCount && Right.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var left = Left.GetEnumerator();

@@ -23,6 +23,9 @@ public abstract partial record Schedule
     /// </summary>
     private sealed record SchFrom(IReadOnlyList<Duration> Items) : Schedule
     {
+        public override int? Count => Items.Count;
+        public override bool CanCount => true;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Items.GetEnumerator();

@@ -20,6 +20,9 @@ public static class UnionTests
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(3));
 
+        union.CanCount.Should().BeFalse();
+        union.Count.Should().BeNull();
+
         #endregion
     }
 
@@ -81,5 +84,27 @@ public static class UnionTests
             .And.ContainInOrder(Duration.Zero, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(3));
 
         #endregion
+    }
+
+    [Fact(DisplayName = "Union can count is false if either schedules are infinite")]
+    public static void Case5()
+    {
+        var union = Schedule.Forever.Union(Schedule.Forever);
+        union.CanCount.Should().BeFalse();
+        union.Count.Should().BeNull();
+        var union2 = Schedule.Once.Union(Schedule.Forever);
+        union2.CanCount.Should().BeFalse();
+        union2.Count.Should().BeNull();
+        var union3 = Schedule.Forever.Union(Schedule.Once);
+        union3.CanCount.Should().BeFalse();
+        union3.Count.Should().BeNull();
+    }
+
+    [Fact(DisplayName = "Union can count is true if both schedule are finite")]
+    public static void Case6()
+    {
+        var union = Schedule.Once.Union(Schedule.Once);
+        union.CanCount.Should().BeTrue();
+        union.Count.Should().Be(1);
     }
 }

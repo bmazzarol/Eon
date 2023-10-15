@@ -51,6 +51,14 @@ public abstract partial record Schedule
     /// </summary>
     private sealed record SchUnion(Schedule Left, Schedule Right) : Schedule
     {
+        public override int? Count =>
+            (Left.Count, Right.Count) switch
+            {
+                ({ } lCount, { } rCount) => Math.Max(lCount, rCount),
+                _ => null
+            };
+        public override bool CanCount => Left.CanCount && Right.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var left = Left.GetEnumerator();
@@ -63,7 +71,7 @@ public abstract partial record Schedule
             {
                 yield return hasLeft switch
                 {
-                    true when hasRight => Math.Min((double)left.Current, right.Current),
+                    true when hasRight => Math.Min(left.Current, right.Current),
                     true => left.Current,
                     _ => right.Current
                 };

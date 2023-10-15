@@ -19,6 +19,9 @@ public abstract partial record Schedule
     /// <param name="Predicate">predicate to apply to each <see cref="Duration"/> emitted</param>
     private sealed record SchWhere(Schedule Schedule, Func<Duration, bool> Predicate) : Schedule
     {
+        public override int? Count => CanCount ? Schedule.AsEnumerable().Count(Predicate) : null;
+        public override bool CanCount => Schedule.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Schedule.GetEnumerator();

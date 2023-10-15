@@ -13,6 +13,9 @@ public static class OnceTests
         enumerator.Current.Should().Be(Duration.Zero);
         enumerator.MoveNext().Should().BeFalse();
 
+        once.CanCount.Should().BeTrue();
+        once.Count.Should().Be(1);
+
         #endregion
     }
 }

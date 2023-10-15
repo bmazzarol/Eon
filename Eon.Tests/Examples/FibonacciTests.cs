@@ -23,6 +23,16 @@ public static class FibonacciTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(5));
         enumerator.MoveNext().Should().BeFalse();
 
+        fibonacci.CanCount.Should().BeTrue();
+        fibonacci.Count.Should().Be(5);
         #endregion
+    }
+
+    [Fact(DisplayName = "Fibonacci is infinite")]
+    public static void Case2()
+    {
+        Schedule fibonacci = Schedule.Fibonacci(TimeSpan.FromSeconds(1));
+        fibonacci.CanCount.Should().BeFalse();
+        fibonacci.Count.Should().BeNull();
     }
 }

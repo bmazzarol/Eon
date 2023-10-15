@@ -18,6 +18,9 @@ public abstract partial record Schedule
     /// <param name="Seed">seed <see cref="Duration"/></param>
     private sealed record SchFibonacci(Duration Seed) : Schedule
     {
+        public override int? Count => null;
+        public override bool CanCount => false;
+
         [SuppressMessage("Blocker Bug", "S2190:Loops and recursions should not be infinite")]
         public override IEnumerator<Duration> GetEnumerator()
         {

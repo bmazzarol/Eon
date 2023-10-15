@@ -22,6 +22,9 @@ public static class AppendTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(3));
         enumerator.MoveNext().Should().BeFalse();
 
+        append.CanCount.Should().BeTrue();
+        append.Count.Should().Be(4);
+
         #endregion
     }
 

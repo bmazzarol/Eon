@@ -21,6 +21,8 @@
     href: intersect.md
   - name: Append (+)
     href: append.md
+  - name: Prepend
+    href: prepend.md
   - name: Interleave
     href: interleave.md
   - name: Where
@@ -35,3 +37,5 @@
     href: exponential.md
   - name: Repeat Forever
     href: repeat-forever.md
+  - name: Up To
+    href: up-to.md

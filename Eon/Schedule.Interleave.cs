@@ -23,6 +23,16 @@ public abstract partial record Schedule
     /// <param name="Right">right <see cref="Schedule"/></param>
     private sealed record SchInterleave(Schedule Left, Schedule Right) : Schedule
     {
+        public override int? Count =>
+            (Left.Count, Right.Count) switch
+            {
+                ({ } lCount, { } rCount) => Math.Min(lCount, rCount),
+                ({ } lCount, _) => lCount,
+                (_, { } rCount) => rCount,
+                _ => null
+            } * 2;
+        public override bool CanCount => Left.CanCount || Right.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var left = Left.GetEnumerator();

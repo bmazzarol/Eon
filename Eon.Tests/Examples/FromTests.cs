@@ -12,6 +12,9 @@ public static class FromTests
             TimeSpan.FromSeconds(6)
         );
 
+        schedule.CanCount.Should().BeTrue();
+        schedule.Count.Should().Be(3);
+
         schedule
             .Should()
             .HaveCount(3)

@@ -27,6 +27,9 @@ public abstract partial record Schedule
     /// </summary>
     private sealed record SchForever(Duration Duration) : Schedule
     {
+        public override int? Count => null;
+        public override bool CanCount => false;
+
         [SuppressMessage("Blocker Bug", "S2190:Loops and recursions should not be infinite")]
         public override IEnumerator<Duration> GetEnumerator()
         {

@@ -21,20 +21,24 @@ public abstract partial record Schedule
     public Schedule Tail => new SchSkip(this, 1);
 
     /// <summary>
-    /// Skip <see cref="Count"/> elements from <see cref="Schedule"/>.
-    /// If <see cref="Schedule"/> completes before <see cref="Count"/> emissions
+    /// Skip <see cref="SkipOver"/> elements from <see cref="Schedule"/>.
+    /// If <see cref="Schedule"/> completes before <see cref="SkipOver"/> emissions
     /// it completes without emitting anything.
     /// </summary>
     /// <param name="Schedule">schedule</param>
-    /// <param name="Count">number of elements to take</param>
-    private sealed record SchSkip(Schedule Schedule, int Count) : Schedule
+    /// <param name="SkipOver">number of elements to take</param>
+    private sealed record SchSkip(Schedule Schedule, int SkipOver) : Schedule
     {
+        public override int? Count =>
+            Schedule.Count.HasValue ? Math.Max(Schedule.Count.Value - SkipOver, 0) : null;
+        public override bool CanCount => Schedule.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Schedule.GetEnumerator();
             for (var i = 0; enumerator.MoveNext(); i++)
             {
-                if (i >= Count)
+                if (i >= SkipOver)
                 {
                     yield return enumerator.Current;
                 }

@@ -51,13 +51,23 @@ public abstract partial record Schedule
     /// </summary>
     private sealed record SchIntersect(Schedule Left, Schedule Right) : Schedule
     {
+        public override int? Count =>
+            (Left.Count, Right.Count) switch
+            {
+                ({ } lCount, { } rCount) => Math.Min(lCount, rCount),
+                ({ } lCount, _) => lCount,
+                (_, { } rCount) => rCount,
+                _ => null
+            };
+        public override bool CanCount => Left.CanCount || Right.CanCount;
+
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var left = Left.GetEnumerator();
             using var right = Right.GetEnumerator();
             while (left.MoveNext() && right.MoveNext())
             {
-                yield return Math.Max((double)left.Current, right.Current);
+                yield return Math.Max(left.Current, right.Current);
             }
         }
     }

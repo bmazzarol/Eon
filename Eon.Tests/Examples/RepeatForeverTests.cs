@@ -21,6 +21,9 @@ public static class RepeatForeverTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
         enumerator.MoveNext().Should().BeTrue();
 
+        repeatForever.CanCount.Should().BeFalse();
+        repeatForever.Count.Should().BeNull();
+
         #endregion
     }
 }

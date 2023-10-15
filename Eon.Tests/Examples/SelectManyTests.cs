@@ -25,6 +25,9 @@ public static class SelectManyTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(3));
         enumerator.MoveNext().Should().BeFalse();
 
+        selectMany.CanCount.Should().BeTrue();
+        selectMany.Count.Should().Be(4);
+
         #endregion
     }
 
@@ -62,10 +65,8 @@ public static class SelectManyTests
 
         Schedule selectMany = Schedule
             .Linear(TimeSpan.FromSeconds(1))
-            .Take(2)
             .SelectMany(_ => Schedule.From(TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1)));
 
-        selectMany.Should().HaveCount(4);
         using var enumerator = selectMany.GetEnumerator();
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
@@ -75,7 +76,9 @@ public static class SelectManyTests
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-        enumerator.MoveNext().Should().BeFalse();
+
+        selectMany.CanCount.Should().BeFalse();
+        selectMany.Count.Should().BeNull();
 
         #endregion
     }

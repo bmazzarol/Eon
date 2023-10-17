@@ -18,11 +18,10 @@ public abstract partial record Schedule
     /// If the action run between updates takes longer than the `interval`, then the
     /// action will be run immediately, but re-runs will not "pile up".
     /// </para>
-    /// <para>
+    /// <code>
     ///     |-----interval-----|-----interval-----|-----interval-----|
     ///     |---------action--------||action|-----|action|-----------|
-    /// </para>
-    ///
+    /// </code>
     /// </summary>
     /// <param name="interval"><see cref="Schedule"/> interval</param>
     /// <param name="currentTimeFunction">current time function</param>
@@ -38,11 +37,10 @@ public abstract partial record Schedule
     /// If the action run between updates takes longer than the <see cref="Interval"/>, then the
     /// action will be run immediately, but re-runs will not "pile up".
     /// </para>
-    /// <para>
+    /// <code>
     ///     |-----interval-----|-----interval-----|-----interval-----|
     ///     |---------action--------||action|-----|action|-----------|
-    /// </para>
-    ///
+    /// </code>
     /// </summary>
     /// <param name="Interval"><see cref="Schedule"/> interval</param>
     /// <param name="CurrentTimeFunction">current time function</param>

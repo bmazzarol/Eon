@@ -34,12 +34,12 @@ public abstract partial record Schedule
         /// <summary>
         /// Minimum <see cref="Position"/> that can be requested
         /// </summary>
-        protected virtual uint Min => 1;
+        protected virtual uint Min => 0;
 
         /// <summary>
         /// Maximum <see cref="Position"/> that can be requested
         /// </summary>
-        protected virtual uint Max => Width - Min;
+        protected virtual uint Max => Width - 1;
 
         /// <summary>
         /// Returns the current `position` in the window based on the current `now`
@@ -57,6 +57,7 @@ public abstract partial record Schedule
         /// <summary>
         /// "Safe" rounded <see cref="Position"/> to maintain in the window
         /// </summary>
+        [ExcludeFromCodeCoverage]
         private uint RoundedPosition
         {
             get

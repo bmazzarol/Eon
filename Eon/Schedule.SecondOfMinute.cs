@@ -7,7 +7,7 @@ public abstract partial record Schedule
     /// <summary>
     /// Cron-like <see cref="Schedule"/> that recurs every specified `second` of each minute
     /// </summary>
-    /// <param name="second">second of the minute, will be rounded to fit between 1 and 59</param>
+    /// <param name="second">second of the minute, will be rounded to fit between 0 and 59</param>
     /// <param name="currentTimeFunction">current time function</param>
     [Pure]
     public static Schedule SecondOfMinute(

@@ -47,3 +47,5 @@
     href: second-of-minute.md
   - name: Minute of Hour
     href: minute-of-hour.md
+  - name: Hour of Day
+    href: hour-of-day.md

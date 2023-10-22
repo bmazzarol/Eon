@@ -52,7 +52,7 @@ public static class SecondOfMinuteTests
         secondOfMinute.Count.Should().BeNull();
     }
 
-    [Fact(DisplayName = "SecondOfMinute rounds seconds less than 1 to 1")]
+    [Fact(DisplayName = "SecondOfMinute rounds seconds less than 0 to 0")]
     public static void Case3()
     {
         Schedule secondOfMinute = Schedule.SecondOfMinute(
@@ -62,7 +62,7 @@ public static class SecondOfMinuteTests
 
         using var enumerator = secondOfMinute.GetEnumerator();
         enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(35)); // 26 + 35 = 61 - 60 = 1
+        enumerator.Current.Should().Be(TimeSpan.FromSeconds(34)); // 26 + 34 = 60 - 60 = 0
 
         secondOfMinute.CanCount.Should().BeFalse();
         secondOfMinute.Count.Should().BeNull();

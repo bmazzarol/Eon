@@ -59,3 +59,7 @@
     href: between.md
   - name: Max Cumulative Delay
     href: max-cumulative-delay.md
+  - name: Jitter
+    href: jitter.md
+  - name: Decorrelate
+    href: decorrelate.md

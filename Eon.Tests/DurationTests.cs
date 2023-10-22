@@ -58,4 +58,10 @@ public static class DurationTests
     {
         Duration.Zero.GetHashCode().Should().Be(((double)0).GetHashCode());
     }
+
+    [Fact(DisplayName = "Durations can be random")]
+    public static void Case7()
+    {
+        Duration.Random(1, 2).Should().BeGreaterOrEqualTo(1).And.BeLessThanOrEqualTo(2);
+    }
 }

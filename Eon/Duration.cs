@@ -37,6 +37,15 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     public static readonly Duration Zero = new(0);
 
     /// <summary>
+    /// Random <see cref="Duration"/> between the provided `min` and `max` <see cref="Duration"/>
+    /// </summary>
+    /// <param name="min">min duration</param>
+    /// <param name="max">max duration</param>
+    /// <param name="seed">optional seed</param>
+    public static Duration Random(Duration min, Duration max, int? seed = default) =>
+        new(RandomFactory.Uniform(min, max, seed));
+
+    /// <summary>
     /// Converts a <see cref="double"/> to a <see cref="Duration"/>
     /// </summary>
     /// <param name="milliseconds">milliseconds</param>

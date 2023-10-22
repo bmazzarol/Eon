@@ -17,13 +17,13 @@ public static class HourOfDayTests
 
         using var enumerator = hourOfDay.GetEnumerator();
         enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(2));
+        enumerator.Current.Should().Be(TimeSpan.FromHours(2)); // 1 + 2 = 3
         enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(23));
+        enumerator.Current.Should().Be(TimeSpan.FromHours(23)); // 4 + 23 = 27 - 24 = 3
         enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(21));
+        enumerator.Current.Should().Be(TimeSpan.FromHours(21)); // 6 + 21 = 27 - 24 = 3
         enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(24));
+        enumerator.Current.Should().Be(TimeSpan.FromHours(24)); // 3 + 24 = 27 - 24 = 3
         enumerator.MoveNext().Should().BeTrue();
 
         hourOfDay.CanCount.Should().BeFalse();

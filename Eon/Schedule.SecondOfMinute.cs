@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
+﻿using System.Diagnostics.Contracts;
 
 namespace Eon;
 
@@ -12,49 +11,19 @@ public abstract partial record Schedule
     /// <param name="currentTimeFunction">current time function</param>
     [Pure]
     public static Schedule SecondOfMinute(
-        int second,
+        uint second,
         Func<DateTimeOffset>? currentTimeFunction = null
     ) => new SchSecondOfMinute(second, currentTimeFunction);
 
-    [Pure]
-    private static int DurationToIntervalStart(
-        int intervalStart,
-        int currentIntervalPosition,
-        int intervalWidth
-    )
-    {
-        var steps = intervalStart - currentIntervalPosition;
-        return steps > 0 ? steps : steps + intervalWidth;
-    }
-
-    [Pure]
-    private static int RoundBetween(int value, int min, int max)
-    {
-        if (value > max)
-            return max;
-        if (value < min)
-            return min;
-        return value;
-    }
-
     private sealed record SchSecondOfMinute(
-        int Second,
+        uint Second,
         Func<DateTimeOffset>? CurrentTimeFunction = null
-    ) : Schedule
+    ) : SchPositionWithinWindow(Second, CurrentTimeFunction)
     {
-        public override int? Count => null;
-        public override bool CanCount => false;
+        protected override double Current(DateTimeOffset now) => (uint)now.Second;
 
-        [SuppressMessage("Blocker Bug", "S2190:Loops and recursions should not be infinite")]
-        public override IEnumerator<Duration> GetEnumerator()
-        {
-            var now = CurrentTimeFunction ?? LiveCurrentTimeFunction;
-            while (true)
-            {
-                yield return TimeSpan.FromSeconds(
-                    DurationToIntervalStart(RoundBetween(Second, 1, 59), now().Second, 60)
-                );
-            }
-        }
+        protected override uint Width => 60;
+
+        protected override Duration DurationToPosition(double steps) => TimeSpan.FromSeconds(steps);
     }
 }

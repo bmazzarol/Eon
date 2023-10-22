@@ -9,17 +9,17 @@ public static class MinuteOfHourTests
     {
         #region Example1
 
-        var dateTimes = DateTimes();
-        Schedule minuteOfHour = Schedule.MinuteOfHour(
-            2,
-            () => dateTimes.MoveNext() ? dateTimes.Current : DateTimeOffset.Now
-        );
+        var now = DateTimeOffset.MinValue;
+        Schedule minuteOfHour = Schedule.MinuteOfHour(2, () => now);
 
         using var enumerator = minuteOfHour.GetEnumerator();
+        now = new DateTime(2022, 1, 1, 1, 26, 0); // 26
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromMinutes(36)); // 26 + 36 = 62 - 60 = 2
+        now = new DateTime(2022, 1, 1, 1, 1, 0); // 1
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromMinutes(1)); // 1 + 1 = 2
+        now = new DateTime(2022, 1, 1, 1, 47, 0); // 47
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromMinutes(15)); // 47 + 15 = 62 - 60 = 2
         enumerator.MoveNext().Should().BeTrue();
@@ -27,12 +27,6 @@ public static class MinuteOfHourTests
         minuteOfHour.CanCount.Should().BeFalse();
         minuteOfHour.Count.Should().BeNull();
 
-        IEnumerator<DateTimeOffset> DateTimes()
-        {
-            yield return new DateTime(2022, 1, 1, 1, 26, 0);
-            yield return new DateTime(2022, 1, 1, 1, 1, 0);
-            yield return new DateTime(2022, 1, 1, 1, 47, 0);
-        }
         #endregion
     }
 

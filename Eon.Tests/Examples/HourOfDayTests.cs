@@ -9,19 +9,20 @@ public static class HourOfDayTests
     {
         #region Example1
 
-        var dateTimes = DateTimes();
-        Schedule hourOfDay = Schedule.HourOfDay(
-            3,
-            () => dateTimes.MoveNext() ? dateTimes.Current : DateTimeOffset.Now
-        );
+        var now = DateTimeOffset.MinValue;
+        Schedule hourOfDay = Schedule.HourOfDay(3, () => now);
 
         using var enumerator = hourOfDay.GetEnumerator();
+        now = new DateTime(2022, 1, 1, 1, 0, 0); // 1
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromHours(2)); // 1 + 2 = 3
+        now = new DateTime(2022, 1, 1, 4, 0, 0); // 4
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromHours(23)); // 4 + 23 = 27 - 24 = 3
+        now = new DateTime(2022, 1, 1, 6, 0, 0); // 6
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromHours(21)); // 6 + 21 = 27 - 24 = 3
+        now = new DateTime(2022, 1, 1, 3, 0, 0); // 3
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromHours(24)); // 3 + 24 = 27 - 24 = 3
         enumerator.MoveNext().Should().BeTrue();
@@ -29,13 +30,6 @@ public static class HourOfDayTests
         hourOfDay.CanCount.Should().BeFalse();
         hourOfDay.Count.Should().BeNull();
 
-        IEnumerator<DateTimeOffset> DateTimes()
-        {
-            yield return new DateTime(2022, 1, 1, 1, 0, 0);
-            yield return new DateTime(2022, 1, 1, 4, 0, 0);
-            yield return new DateTime(2022, 1, 1, 6, 0, 0);
-            yield return new DateTime(2022, 1, 1, 3, 0, 0);
-        }
         #endregion
     }
 

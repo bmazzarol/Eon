@@ -9,17 +9,17 @@ public static class SecondOfMinuteTests
     {
         #region Example1
 
-        var dateTimes = DateTimes();
-        Schedule secondOfMinute = Schedule.SecondOfMinute(
-            2,
-            () => dateTimes.MoveNext() ? dateTimes.Current : DateTimeOffset.Now
-        );
+        var now = DateTimeOffset.MinValue;
+        Schedule secondOfMinute = Schedule.SecondOfMinute(2, () => now);
 
         using var enumerator = secondOfMinute.GetEnumerator();
+        now = new DateTime(2022, 1, 1, 1, 1, 26); // 26
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(36)); // 26 + 36 = 62 - 60 = 2
+        now = new DateTime(2022, 1, 1, 1, 1, 1); // 1
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(1)); // 1 + 1 = 2
+        now = new DateTime(2022, 1, 1, 1, 1, 47); // 47
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().Be(TimeSpan.FromSeconds(15)); // 47 + 15 = 62 - 60 = 2
         enumerator.MoveNext().Should().BeTrue();
@@ -27,12 +27,6 @@ public static class SecondOfMinuteTests
         secondOfMinute.CanCount.Should().BeFalse();
         secondOfMinute.Count.Should().BeNull();
 
-        IEnumerator<DateTimeOffset> DateTimes()
-        {
-            yield return new DateTime(2022, 1, 1, 1, 1, 26);
-            yield return new DateTime(2022, 1, 1, 1, 1, 1);
-            yield return new DateTime(2022, 1, 1, 1, 1, 47);
-        }
         #endregion
     }
 

@@ -51,3 +51,9 @@
     href: hour-of-day.md
   - name: Day of Week
     href: day-of-week.md
+  - name: Less Than
+    href: less-than.md
+  - name: Greater Than
+    href: greater-than.md
+  - name: Between
+    href: between.md

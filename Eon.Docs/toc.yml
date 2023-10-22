@@ -3,6 +3,8 @@ items:
     href: index.md
   - name: Getting Started
     href: articles/getting-started.md
+  - name: How to use with Polly.NET
+    href: articles/using-eon-with-polly.md
   - name: Components
     href: articles/components/toc.yml
   - name: .NET API Docs

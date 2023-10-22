@@ -63,3 +63,5 @@
     href: jitter.md
   - name: Decorrelate
     href: decorrelate.md
+  - name: Reset After
+    href: reset-after.md

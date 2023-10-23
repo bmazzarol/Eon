@@ -58,7 +58,7 @@ jobs:
             /d:sonar.host.url="https://sonarcloud.io" `
             /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html `
           
-          dotnet dotcover test --dcReportType=HTML
+          dotnet dotcover test --dcReportType=HTML --dcAttributeFilters=System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute
           
           ./.sonar/scanner/dotnet-sonarscanner end `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

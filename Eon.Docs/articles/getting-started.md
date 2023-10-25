@@ -44,8 +44,9 @@ This produces the following emissions, `1, 2, 3, 4, 5, 5, 5, 5, 5, 5`
 This library exposes a large number of @Eon.Schedule `components` that can
 be used and composed to create new @Eon.Schedule combinations.
 
-The two main combinators are @Eon.Schedule.Union* (`|`) and
-@Eon.Schedule.Intersect* (`&`).
+The two main combinators are @Eon.Schedule.Union*
+(|) and
+@Eon.Schedule.Intersect* (&).
 
 Union can be used when you want the emissions from `either` @Eon.Schedule.
 

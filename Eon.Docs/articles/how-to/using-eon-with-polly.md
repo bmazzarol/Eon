@@ -9,8 +9,8 @@ which can be used to configure the retry policy.
 
 Integrating a @Eon.Schedule can be done like so,
 
-[!code-csharp[Example1](../../Eon.Tests/Examples/PollyExamples.cs#Example1)]
+[!code-csharp[Example1](../../../Eon.Tests/Examples/PollyExamples.cs#Example1)]
 
 Using an infinite @Eon.Schedule is also possible,
 
-[!code-csharp[Example1](../../Eon.Tests/Examples/PollyExamples.cs#Example2)]
+[!code-csharp[Example1](../../../Eon.Tests/Examples/PollyExamples.cs#Example2)]

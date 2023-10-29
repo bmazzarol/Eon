@@ -15,7 +15,7 @@
 [![Check Markdown](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml)
 [![CodeQL](https://github.com/bmazzarol/eon/actions/workflows/codeql.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/codeql.yml)
 
-A simple Schedule type for C# and dotnet
+A Schedule type for C# and dotnet
 
 </div>
 

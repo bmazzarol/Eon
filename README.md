@@ -65,4 +65,4 @@ For more details/information have a look a the test projects or create an issue.
 
 ## Attributions
 
-[Construction icons created by juicy_fish](https://www.flaticon.com/free-icons/construction)
+[Icons created by juicy_fish](https://www.flaticon.com/free-icons/construction)

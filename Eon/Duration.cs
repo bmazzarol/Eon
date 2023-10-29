@@ -4,14 +4,11 @@ using System.Runtime.CompilerServices;
 namespace Eon;
 
 /// <summary>
-/// Period of time (duration) in milliseconds.
+/// Period of time (duration).
 /// It differs from <see cref="System.TimeSpan"/> in that it can never be negative
 /// </summary>
 public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
 {
-    /// <summary>
-    /// Number of milliseconds the duration constitutes
-    /// </summary>
     private readonly TimeSpan _timeSpan;
 
     /// <summary>

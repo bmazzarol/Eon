@@ -5,36 +5,36 @@ namespace Eon;
 
 /// <summary>
 /// Period of time (duration) in milliseconds.
-/// It differs from <see cref="TimeSpan"/> in that it can never be negative
+/// It differs from <see cref="System.TimeSpan"/> in that it can never be negative
 /// </summary>
 public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
 {
     /// <summary>
     /// Number of milliseconds the duration constitutes
     /// </summary>
-    public readonly double Milliseconds;
+    private readonly TimeSpan _timeSpan;
 
     /// <summary>
     /// Duration constructor
     /// </summary>
-    /// <param name="milliseconds">Magnitude of the duration.  Must be zero or a positive value</param>
-    /// <exception cref="ArgumentException">Throws if `milliseconds` is less than `0`</exception>
-    public Duration(double milliseconds)
+    /// <param name="timeSpan">Magnitude of the duration.  Must be zero or a positive value</param>
+    /// <exception cref="ArgumentException">Throws if `timeSpan` is less than `0`</exception>
+    public Duration(TimeSpan timeSpan)
     {
-        if (milliseconds < 0)
+        if (timeSpan.Ticks < 0)
         {
             throw new ArgumentException(
-                $"{nameof(milliseconds)} must be a positive number.",
-                nameof(milliseconds)
+                $"{nameof(timeSpan)} must be a positive.",
+                nameof(timeSpan)
             );
         }
-        Milliseconds = milliseconds;
+        _timeSpan = timeSpan;
     }
 
     /// <summary>
     /// Zero magnitude <see cref="Duration"/> (instant)
     /// </summary>
-    public static readonly Duration Zero = new(0);
+    public static readonly Duration Zero = TimeSpan.Zero;
 
     /// <summary>
     /// Random <see cref="Duration"/> between the provided `min` and `max` <see cref="Duration"/>
@@ -42,8 +42,8 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="min">min duration</param>
     /// <param name="max">max duration</param>
     /// <param name="seed">optional seed</param>
-    public static Duration Random(Duration min, Duration max, int? seed = default) =>
-        new(RandomFactory.Uniform(min, max, seed));
+    public static Duration Random(in Duration min, in Duration max, int? seed = default) =>
+        RandomFactory.Uniform(min, max, seed);
 
     /// <summary>
     /// Converts a <see cref="double"/> to a <see cref="Duration"/>
@@ -51,15 +51,16 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="milliseconds">milliseconds</param>
     /// <returns>duration</returns>
     [Pure]
-    public static implicit operator Duration(double milliseconds) => new(milliseconds);
+    public static implicit operator Duration(double milliseconds) =>
+        TimeSpan.FromMilliseconds(milliseconds);
 
     /// <summary>
-    /// Converts a <see cref="TimeSpan"/> to a <see cref="Duration"/>
+    /// Converts a <see cref="System.TimeSpan"/> to a <see cref="Duration"/>
     /// </summary>
     /// <param name="timeSpan">time span</param>
     /// <returns>duration</returns>
     [Pure]
-    public static implicit operator Duration(TimeSpan timeSpan) => new(timeSpan.TotalMilliseconds);
+    public static implicit operator Duration(TimeSpan timeSpan) => new(timeSpan);
 
     /// <summary>
     /// Converts a <see cref="Duration"/> to a <see cref="double"/>
@@ -67,16 +68,16 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="duration">duration</param>
     /// <returns>milliseconds</returns>
     [Pure]
-    public static implicit operator double(in Duration duration) => duration.Milliseconds;
+    public static implicit operator double(in Duration duration) =>
+        duration._timeSpan.TotalMilliseconds;
 
     /// <summary>
-    /// Converts a <see cref="Duration"/> to a <see cref="TimeSpan"/>
+    /// Converts a <see cref="Duration"/> to a <see cref="System.TimeSpan"/>
     /// </summary>
     /// <param name="duration">duration</param>
     /// <returns>timespan</returns>
     [Pure]
-    public static explicit operator TimeSpan(in Duration duration) =>
-        TimeSpan.FromMilliseconds(duration.Milliseconds);
+    public static explicit operator TimeSpan(in Duration duration) => duration._timeSpan;
 
     /// <summary>
     /// Compares this instance to a specified <see cref="Duration"/> and returns
@@ -86,7 +87,7 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="other">other <see cref="Duration"/></param>
     /// <returns>integer which is either less than 0, 0 or greater than 0</returns>
     [Pure]
-    private int CompareToInternal(in Duration other) => Milliseconds.CompareTo(other);
+    private int CompareToInternal(in Duration other) => _timeSpan.CompareTo(other._timeSpan);
 
     /// <inheritdoc />
     [Pure]
@@ -139,8 +140,8 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="second">second <see cref="Duration"/></param>
     /// <returns>true if the `first` is equal to the `second`</returns>
     [Pure]
-    public static bool operator ==(Duration first, Duration second) =>
-        first.Milliseconds.Equals(second.Milliseconds);
+    public static bool operator ==(in Duration first, in Duration second) =>
+        first._timeSpan.Equals(second._timeSpan);
 
     /// <summary>
     /// Returns true if the `first` <see cref="Duration"/> does not equal the `second` <see cref="Duration"/>
@@ -149,12 +150,12 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="second">second <see cref="Duration"/></param>
     /// <returns>true if the `first` is not equal to the `second`</returns>
     [Pure]
-    public static bool operator !=(Duration first, Duration second) =>
-        !first.Milliseconds.Equals(second.Milliseconds);
+    public static bool operator !=(in Duration first, in Duration second) =>
+        !first._timeSpan.Equals(second._timeSpan);
 
     /// <inheritdoc />
     [Pure]
-    public bool Equals(Duration other) => Milliseconds.Equals(other);
+    public bool Equals(Duration other) => _timeSpan.Equals(other._timeSpan);
 
     /// <inheritdoc />
     [Pure]
@@ -162,15 +163,15 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
 
     /// <inheritdoc />
     [Pure]
-    public override int GetHashCode() => Milliseconds.GetHashCode();
+    public override int GetHashCode() => _timeSpan.GetHashCode();
 
     /// <summary>
     /// Exposes an awaiter from <see cref="Task.Delay(int)"/> to allow direct await on a <see cref="Duration"/>
     /// </summary>
     /// <returns><see cref="Task.Delay(int)"/> awaiter</returns>
-    public TaskAwaiter GetAwaiter() => Task.Delay((int)Milliseconds).GetAwaiter();
+    public TaskAwaiter GetAwaiter() => Task.Delay(_timeSpan).GetAwaiter();
 
     /// <inheritdoc />
     [Pure]
-    public override string ToString() => $"{nameof(Duration)}({(TimeSpan)this})";
+    public override string ToString() => $"{nameof(Duration)}({_timeSpan.ToString()})";
 }

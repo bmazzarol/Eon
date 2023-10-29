@@ -37,7 +37,7 @@ public static class DurationTests
     [Fact(DisplayName = "Durations do not support negative durations")]
     public static void Case3()
     {
-        Assert.Throws<ArgumentException>(() => new Duration(-1));
+        Assert.Throws<ArgumentException>(() => new Duration(TimeSpan.FromTicks(-1)));
     }
 
     [Fact(DisplayName = "Durations can be awaited")]

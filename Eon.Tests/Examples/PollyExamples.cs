@@ -10,17 +10,15 @@ public static class PollyExamples
     {
         #region Example1
 
-        // build any schedule using Eon
+        // build a schedule using Eon
         Schedule schedule = Schedule.Linear(1).Take(5);
-        // get the durations
-        var durations = schedule.ToArray();
         // now create the options
         RetryStrategyOptions options = new RetryStrategyOptions
         {
             MaxRetryAttempts = schedule.Count ?? int.MaxValue,
             Delay = TimeSpan.Zero,
             DelayGenerator = x =>
-                ValueTask.FromResult<TimeSpan?>((TimeSpan)durations[x.AttemptNumber])
+                ValueTask.FromResult<TimeSpan?>((TimeSpan)schedule[x.AttemptNumber])
         };
         ResiliencePipeline pipeline = new ResiliencePipelineBuilder().AddRetry(options).Build();
         int attempts = 0;
@@ -43,7 +41,7 @@ public static class PollyExamples
     {
         #region Example2
 
-        // build any schedule using Eon
+        // build a schedule using Eon
         Schedule schedule = Schedule.Linear(1);
         // now create the options
         RetryStrategyOptions options = new RetryStrategyOptions
@@ -51,12 +49,7 @@ public static class PollyExamples
             MaxRetryAttempts = int.MaxValue,
             Delay = TimeSpan.Zero,
             DelayGenerator = x =>
-            {
-                var enumerator = x.AttemptNumber == 0 ? schedule.GetEnumerator() : null;
-                return ValueTask.FromResult<TimeSpan?>(
-                    enumerator?.MoveNext() == true ? (TimeSpan)enumerator.Current : null
-                );
-            }
+                ValueTask.FromResult<TimeSpan?>((TimeSpan)schedule[x.AttemptNumber])
         };
         ResiliencePipeline pipeline = new ResiliencePipelineBuilder().AddRetry(options).Build();
         int attempts = 0;

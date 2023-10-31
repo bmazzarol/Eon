@@ -21,7 +21,7 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
         if (timeSpan.Ticks < 0)
         {
             throw new ArgumentException(
-                $"{nameof(timeSpan)} must be a positive.",
+                $"{nameof(timeSpan)} must be positive.",
                 nameof(timeSpan)
             );
         }

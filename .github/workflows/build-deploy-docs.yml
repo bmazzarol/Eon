@@ -11,7 +11,7 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - uses: bmazzarol/bmazzarol/.github/actions/build-deploy-docs.yml@main
+      - uses: bmazzarol/bmazzarol/.github/actions/build-deploy-docs@main
         with:
           docsProjectPath: Eon.Docs
           csProjFileName: Eon.Docs.csproj

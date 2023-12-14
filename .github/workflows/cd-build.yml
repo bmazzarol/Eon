@@ -17,7 +17,7 @@ jobs:
     name: Publish to Nuget
     runs-on: ubuntu-latest
     steps:
-      - uses: bmazzarol/bmazzarol/.github/actions/ci-build@main
+      - uses: bmazzarol/bmazzarol/.github/actions/cd-build@main
         with:
           version: ${{ env.PACKAGE_VERSION }}
           nugetKey: ${{ secrets.NUGET_API_KEY }}

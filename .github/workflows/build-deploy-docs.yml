@@ -6,8 +6,12 @@ on:
 
 jobs:
   build-and-deploy-docs:
-    name: Build and deploy docs
-    uses: bmazzarol/bmazzarol/.github/workflows/build-deploy-docs.yml@main
-    with:
-      docsProjectPath: Eon.Docs
-      csProjFileName: Eon.Docs.csproj
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: bmazzarol/bmazzarol/.github/actions/build-deploy-docs.yml@main
+        with:
+          docsProjectPath: Eon.Docs
+          csProjFileName: Eon.Docs.csproj

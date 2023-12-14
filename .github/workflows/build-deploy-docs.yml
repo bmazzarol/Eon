@@ -2,31 +2,12 @@
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: |
-            6.0.x
-            7.0.x
-      - name: Build
-        run: dotnet build --configuration Release Eon.Docs/Eon.Docs.csproj
-      - name: Upload Site
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: Eon.Docs/_site
-      - name: Publish Site
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: Eon.Docs/_site
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+  build-and-deploy-docs:
+    name: Build and deploy docs
+    uses: bmazzarol/bmazzarol/.github/workflows/build-deploy-docs.yml@main
+    with:
+      docsProjectPath: Eon.Docs
+      csProjFileName: Eon.Docs.csproj

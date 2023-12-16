@@ -13,15 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions: 
       checks: write
+      pull-requests: write
     steps:
       - uses: bmazzarol/bmazzarol/.github/actions/ci-build@main
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           sonarToken: ${{ secrets.SONAR_TOKEN }}
           sonarProjectKey: bmazzarol_Eon
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: ${{ always() && github.event_name == 'pull_request' }}
-        with:
-          files: |
-            **/test-results.trx

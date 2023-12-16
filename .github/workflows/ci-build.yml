@@ -11,6 +11,8 @@ jobs:
     if: ${{ github.actor != 'dependabot[bot]' }}
     name: Build and analyze
     runs-on: ubuntu-latest
+    permissions: 
+      checks: write
     steps:
       - uses: bmazzarol/bmazzarol/.github/actions/ci-build@main
         with:

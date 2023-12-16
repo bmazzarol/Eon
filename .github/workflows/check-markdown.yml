@@ -18,6 +18,4 @@ jobs:
       - uses: bmazzarol/bmazzarol/.github/actions/check-markdown@main
         with:
           targetMdFiles: |
-            Eon*/**/*.md
-            *.md
-            !LICENSE.md
+            "Eon*/**/*.md" "*.md" "!LICENSE.md"

@@ -14,5 +14,6 @@ jobs:
     steps:
       - uses: bmazzarol/bmazzarol/.github/actions/ci-build@main
         with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
           sonarToken: ${{ secrets.SONAR_TOKEN }}
           sonarProjectKey: bmazzarol_Eon

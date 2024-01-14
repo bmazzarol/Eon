@@ -14,7 +14,7 @@
 [![CD Build](https://github.com/bmazzarol/eon/actions/workflows/cd-build.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/cd-build.yml)
 [![Check Markdown](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml)
 
-A Schedule type for C# and dotnet
+:watch: A Schedule type for C# and dotnet
 
 </div>
 

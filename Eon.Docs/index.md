@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD033 MD041 -->
 <div align="center">
 
-<img src="images/schedule-icon.png" alt="HTTP BuildR" width="150px"/>
+<img src="images/schedule-icon.png" alt="Eon" width="150px"/>
 
 # Eon
 
@@ -13,7 +13,7 @@
 [![CD Build](https://github.com/bmazzarol/eon/actions/workflows/cd-build.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/cd-build.yml)
 [![Check Markdown](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml)
 
-A Schedule type for C# and dotnet
+:watch: A Schedule type for C# and dotnet
 
 ---
 

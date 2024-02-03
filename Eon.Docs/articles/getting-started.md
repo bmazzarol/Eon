@@ -9,16 +9,16 @@ this to the top of each `.cs` file that needs it:
 using Eon;
 ```
 
-Now a @Eon.Schedule can be created.
+Now a <xref:Eon.Schedule> can be created.
 
-Lets start with a simple @Eon.Schedule that runs forever emitting
-@Eon.Duration.Zero values
+Lets start with a simple <xref:Eon.Schedule> that runs forever emitting
+<xref:Eon.Duration.Zero> values
 
 ```csharp
 Schedule forever = Schedule.Forever;
 ```
 
-A @Eon.Schedule implements @System.Collections.Generic.IEnumerable`1
+A <xref:Eon.Schedule> implements <xref:System.Collections.Generic.IEnumerable`1>
 so can be iterated like any collection
 
 ```csharp
@@ -28,11 +28,11 @@ foreach(Duration zero in forever)
 }
 ```
 
-The power of @Eon.Schedule is that new @Eon.Schedule can be built
-out of simpler @Eon.Schedule.
+The power of <xref:Eon.Schedule> is that new <xref:Eon.Schedule> can be built
+out of simpler <xref:Eon.Schedule>.
 
-Lets create a @Eon.Schedule that runs 10 times, with a linear backoff to a
-max @Eon.Duration.
+Lets create a <xref:Eon.Schedule> that runs 10 times, with a linear backoff to a
+max <xref:Eon.Duration>.
 
 ```csharp
 Schedule custom = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(10) 
@@ -41,33 +41,33 @@ Schedule custom = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(10)
 
 This produces the following emissions, `1, 2, 3, 4, 5, 5, 5, 5, 5, 5`
 
-This library exposes a large number of @Eon.Schedule `components` that can
-be used and composed to create new @Eon.Schedule combinations.
+This library exposes a large number of <xref:Eon.Schedule> `components` that can
+be used and composed to create new <xref:Eon.Schedule> combinations.
 
-The two main combinators are @Eon.Schedule.Union*
-(|) and
-@Eon.Schedule.Intersect* (&).
+The two main combinators are [Union (|)](xref:Eon.Schedule.Union*)
+and [Intersect (&)](xref:Eon.Schedule.Intersect*).
 
-Union can be used when you want the emissions from `either` @Eon.Schedule.
+Union can be used when you want the emissions from `either` <xref:Eon.Schedule>.
 
-It will take the `minimum` @Eon.Duration from either @Eon.Schedule and will
-only stop running when `both` @Eon.Schedule complete.
+It will take the `minimum` <xref:Eon.Duration> from either <xref:Eon.Schedule>
+and will only stop running when `both` <xref:Eon.Schedule> complete.
 
 ```csharp
 Schedule custom = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(10)
-                | Schedule.Spaced(TimeSpan.FromSeconds(1)).Take(5)     
+                | Schedule.Spaced(TimeSpan.FromSeconds(1)).Take(5)
 ```
 
 This will producer the following emissions, `1, 1, 1, 1, 1, 6, 7, 8, 9, 10`
 
-Intersect can be used when you want the emissions from `both` @Eon.Schedule.
+Intersect can be used when you want the emissions from `both`
+<xref:Eon.Schedule>.
 
-It will take the `maximum` @Eon.Duration from both @Eon.Schedule and will
-stop running when `any` @Eon.Schedule complete.
+It will take the `maximum` <xref:Eon.Duration> from both <xref:Eon.Schedule>
+and will stop running when `any` <xref:Eon.Schedule> complete.
 
 ```csharp
 Schedule custom = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(10)
-                & Schedule.Spaced(TimeSpan.FromSeconds(5)).Take(10)     
+                & Schedule.Spaced(TimeSpan.FromSeconds(5)).Take(10)
 ```
 
 This will producer the following emissions, `5, 5, 5, 5, 5, 6, 7, 8, 9, 10`

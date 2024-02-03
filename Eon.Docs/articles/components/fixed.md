@@ -1,11 +1,11 @@
 ﻿# Fixed
 
-@Eon.Schedule.Fixed* emits a @Eon.Duration which would run up to the
+<xref:Eon.Schedule.Fixed*> emits a <xref:Eon.Duration> which would run up to the
 defined `interval` boundary, enforcing a fixed cadence to the
-@Eon.Schedule.
+<xref:Eon.Schedule>.
 
 If the action run between emissions takes longer than the `interval`,
-then a @Eon.Duration.Zero will be emitted, so re-runs will not
+then a <xref:Eon.Duration.Zero> will be emitted, so re-runs will not
 "pile up".
 
 ``` shell

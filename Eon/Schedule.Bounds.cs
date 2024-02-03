@@ -27,21 +27,20 @@ public abstract partial record Schedule
     /// <param name="max">max delay to return</param>
     [Pure]
     public static ScheduleTransformer Between(Duration min, Duration max) =>
-        Transform(
-            s =>
-                s.Select(x =>
+        Transform(s =>
+            s.Select(x =>
+            {
+                if (x < min)
                 {
-                    if (x < min)
-                    {
-                        return min;
-                    }
+                    return min;
+                }
 
-                    if (x > max)
-                    {
-                        return max;
-                    }
+                if (x > max)
+                {
+                    return max;
+                }
 
-                    return x;
-                })
+                return x;
+            })
         );
 }

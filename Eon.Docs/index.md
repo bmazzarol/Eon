@@ -31,12 +31,12 @@ is [Cron](https://en.wikipedia.org/wiki/Cron). This is a job scheduler that
 comes paired with a simple language; crontab that is used to define how the
 job is to be repeated.
 
-Eon exposes a type @Eon.Schedule, that is a modern alternative
+Eon exposes a type <xref:Eon.Schedule>, that is a modern alternative
 to Cron, that is not concerned with how its executed, just the cadence at which
 an execution engine could run it.
 
-Its an immutable blueprint; a potentially infinite stream of @Eon.Duration that
-can be iterated and potentially awaited.
+Its an immutable blueprint; a potentially infinite stream of <xref:Eon.Duration>
+that can be iterated and potentially awaited.
 
 ```csharp
 // defines a simple schedule that emmits 5 durations each 2 seconds long
@@ -55,12 +55,12 @@ foreach(Duration duration in schedule)
 }
 ```
 
-There are many combinators which allow @Eon.Schedule to be composed out of
-simple building blocks reducing the need to extend @Eon.Schedule directly. Eon
-exposes many of these combinators, which are documented here.
+There are many combinators which allow <xref:Eon.Schedule> to be composed out of
+simple building blocks reducing the need to extend <xref:Eon.Schedule>
+directly. Eon exposes many of these combinators, which are documented here.
 
 However if its required it is as simple as writing a custom
-@System.Collections.Generic.IEnumerable`1 of @Eon.Duration.
+<xref:System.Collections.Generic.IEnumerable`1> of <xref:Eon.Duration>.
 
 For more details/information keep reading the docs or have a look at the test
 projects or create an issue.

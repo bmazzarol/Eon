@@ -1,8 +1,9 @@
 ﻿# Take
 
-@Eon.Schedule.Take* limits a @Eon.Schedule to `take` number of emissions.
+<xref:Eon.Schedule.Take*> limits a <xref:Eon.Schedule> to `take` number of
+emissions.
 
-A @Eon.ScheduleTransformer also exists called @Eon.Schedule.Recurs*
+A <xref:Eon.ScheduleTransformer> also exists called <xref:Eon.Schedule.Recurs*>
 which does the same thing
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/TakeTests.cs#Example1)]

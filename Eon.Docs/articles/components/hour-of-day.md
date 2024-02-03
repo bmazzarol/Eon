@@ -1,7 +1,7 @@
 ﻿# Hour of Day
 
-@Eon.Schedule.HourOfDay* is a Cron-like @Eon.Schedule that recurs every
-specified `hour` of each day
+<xref:Eon.Schedule.HourOfDay*> is a Cron-like <xref:Eon.Schedule> that
+recurs every specified `hour` of each day
 
 > [!NOTE]
 > `hour` must be between 0 and 23. Any other value will be round down or up

@@ -1,7 +1,7 @@
 ﻿# Minute of Hour
 
-@Eon.Schedule.MinuteOfHour* is a Cron-like @Eon.Schedule that recurs every
-specified `minute` of each hour
+<xref:Eon.Schedule.MinuteOfHour*> is a Cron-like <xref:Eon.Schedule> that
+recurs every specified `minute` of each hour
 
 > [!NOTE]
 > `minute` must be between 0 and 59. Any other value will be round down or up

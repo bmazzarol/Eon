@@ -1,6 +1,6 @@
 ﻿# Windowed
 
-@Eon.Schedule.Windowed* divides a timeline into `interval`-long windows,
+<xref:Eon.Schedule.Windowed*> divides a timeline into `interval`-long windows,
 and sleeps until the nearest window boundary every time it recurs.
 
 For example,

@@ -7,9 +7,9 @@ public abstract partial record Schedule
     /// <summary>
     /// A <see cref="ScheduleTransformer"/> which repeats any <see cref="Schedule"/> forever
     /// </summary>
-    public static readonly ScheduleTransformer RepeatForever = Transform(
-        s => new SchRepeatForever(s)
-    );
+    public static readonly ScheduleTransformer RepeatForever = Transform(s => new SchRepeatForever(
+        s
+    ));
 
     /// <summary>
     /// Repeats <see cref="Schedule"/> forever

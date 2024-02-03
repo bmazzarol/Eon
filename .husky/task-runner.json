@@ -24,6 +24,14 @@
             "args": [
                 "test"
             ]
+        },
+        {
+            "name": "Lint Docs",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "Eon.Docs/Eon.Docs.csproj"
+            ]
         }
     ]
 }

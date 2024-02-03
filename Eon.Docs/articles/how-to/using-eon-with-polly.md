@@ -7,10 +7,10 @@ It exposes
 a [RetryStrategyOptions](https://github.com/App-vNext/Polly/blob/main/src/Polly.Core/Retry/RetryStrategyOptions.TResult.cs)
 which can be used to configure the retry policy.
 
-Integrating a @Eon.Schedule can be done like so,
+Integrating a <xref:Eon.Schedule> can be done like so,
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/PollyExamples.cs#Example1)]
 
-Using an infinite @Eon.Schedule is also possible,
+Using an infinite <xref:Eon.Schedule> is also possible,
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/PollyExamples.cs#Example2)]

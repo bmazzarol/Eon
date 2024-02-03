@@ -14,10 +14,11 @@ public static class DurationTests
         (one < two).Should().BeTrue();
 
         two.CompareTo(two).Should().Be(0);
+#pragma warning disable CS1718
         (two >= two).Should().BeTrue();
         (two <= two).Should().BeTrue();
         (two < two).Should().BeFalse();
-
+#pragma warning restore CS1718
         (two > one).Should().BeTrue();
         (two >= one).Should().BeTrue();
         (two <= one).Should().BeFalse();

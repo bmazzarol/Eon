@@ -1,7 +1,7 @@
 ﻿# Second of Minute
 
-@Eon.Schedule.SecondOfMinute* is a Cron-like @Eon.Schedule that recurs every
-specified `second` of each minute
+<xref:Eon.Schedule.SecondOfMinute*> is a Cron-like <xref:Eon.Schedule> that
+recurs every specified `second` of each minute
 
 > [!NOTE]
 > `second` must be between 0 and 59. Any other value will be round down or up

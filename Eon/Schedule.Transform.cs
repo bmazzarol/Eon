@@ -16,8 +16,8 @@ public abstract partial record Schedule
     /// <summary>
     /// A <see cref="ScheduleTransformer"/> that will enforce the first emission from the <see cref="Schedule"/> is a <see cref="Duration.Zero"/>
     /// </summary>
-    public static readonly ScheduleTransformer NoDelayOnFirst = Transform(
-        s => s.Tail.Prepend(Duration.Zero)
+    public static readonly ScheduleTransformer NoDelayOnFirst = Transform(s =>
+        s.Tail.Prepend(Duration.Zero)
     );
 
     /// <summary>

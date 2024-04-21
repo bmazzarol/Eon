@@ -6,6 +6,7 @@
 # Eon
 
 [:running: **_Getting Started_**](https://bmazzarol.github.io/Eon/articles/getting-started.html)
+|
 [:books: **_Documentation_**](https://bmazzarol.github.io/Eon)
 
 [![Nuget](https://img.shields.io/nuget/v/eon)](https://www.nuget.org/packages/eon/)

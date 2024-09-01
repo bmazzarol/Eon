@@ -55,7 +55,7 @@ public abstract partial record Schedule
             (Left.Count, Right.Count) switch
             {
                 ({ } lCount, { } rCount) => Math.Max(lCount, rCount),
-                _ => null
+                _ => null,
             };
         public override bool CanCount => Left.CanCount && Right.CanCount;
 
@@ -73,7 +73,7 @@ public abstract partial record Schedule
                 {
                     true when hasRight => Math.Min(left.Current, right.Current),
                     true => left.Current,
-                    _ => right.Current
+                    _ => right.Current,
                 };
 
                 hasLeft = hasLeft && left.MoveNext();

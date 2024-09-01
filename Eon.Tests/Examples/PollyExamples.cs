@@ -18,7 +18,7 @@ public static class PollyExamples
             MaxRetryAttempts = schedule.Count ?? int.MaxValue,
             Delay = TimeSpan.Zero,
             DelayGenerator = x =>
-                ValueTask.FromResult<TimeSpan?>((TimeSpan)schedule[x.AttemptNumber])
+                ValueTask.FromResult<TimeSpan?>((TimeSpan)schedule[x.AttemptNumber]),
         };
         ResiliencePipeline pipeline = new ResiliencePipelineBuilder().AddRetry(options).Build();
         int attempts = 0;
@@ -49,7 +49,7 @@ public static class PollyExamples
             MaxRetryAttempts = int.MaxValue,
             Delay = TimeSpan.Zero,
             DelayGenerator = x =>
-                ValueTask.FromResult<TimeSpan?>((TimeSpan)schedule[x.AttemptNumber])
+                ValueTask.FromResult<TimeSpan?>((TimeSpan)schedule[x.AttemptNumber]),
         };
         ResiliencePipeline pipeline = new ResiliencePipelineBuilder().AddRetry(options).Build();
         int attempts = 0;

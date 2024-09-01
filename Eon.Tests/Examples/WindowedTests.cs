@@ -12,7 +12,7 @@ public static class WindowedTests
             now,
             now + TimeSpan.FromSeconds(6),
             now + TimeSpan.FromSeconds(1),
-            now + TimeSpan.FromSeconds(4)
+            now + TimeSpan.FromSeconds(4),
         }
             .AsEnumerable()
             .GetEnumerator();

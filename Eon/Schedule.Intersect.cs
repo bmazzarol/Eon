@@ -57,7 +57,7 @@ public abstract partial record Schedule
                 ({ } lCount, { } rCount) => Math.Min(lCount, rCount),
                 ({ } lCount, _) => lCount,
                 (_, { } rCount) => rCount,
-                _ => null
+                _ => null,
             };
         public override bool CanCount => Left.CanCount || Right.CanCount;
 

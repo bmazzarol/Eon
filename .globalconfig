@@ -7,3 +7,6 @@ dotnet_diagnostic.CA1848.severity = none
 
 # Add comma after the last value
 dotnet_diagnostic.MA0007.severity = none
+
+# This loop's stop incrementer updates 'i' but the stop condition doesn't test any variables.
+dotnet_diagnostic.S1994.severity = suggestion

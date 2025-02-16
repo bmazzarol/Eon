@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -9,7 +7,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="day">day of the week</param>
     /// <param name="currentTimeFunction">current time function</param>
-    [Pure]
     public static Schedule DayOfWeek(
         DayOfWeek day,
         Func<DateTimeOffset>? currentTimeFunction = null

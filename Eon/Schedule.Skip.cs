@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Eon;
 
@@ -11,13 +11,11 @@ public abstract partial record Schedule
     /// it will emmit nothing</remarks>
     /// <param name="count">`count` emissions to skip</param>
     /// <returns><see cref="Schedule"/> with `count` <see cref="Duration"/> skipped</returns>
-    [Pure]
     public Schedule Skip(int count) => new SchSkip(this, count);
 
     /// <summary>
     /// Take all but the first <see cref="Duration"/> from the <see cref="Schedule"/>
     /// </summary>
-    [Pure]
     public Schedule Tail => new SchSkip(this, 1);
 
     /// <summary>
@@ -33,6 +31,10 @@ public abstract partial record Schedule
             Schedule.Count.HasValue ? Math.Max(Schedule.Count.Value - SkipOver, 0) : null;
         public override bool CanCount => Schedule.CanCount;
 
+        [SuppressMessage(
+            "Critical Code Smell",
+            "S1994:\"for\" loop increment clauses should modify the loops\' counters"
+        )]
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Schedule.GetEnumerator();

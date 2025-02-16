@@ -14,6 +14,7 @@
             "args": [
                 "markdownlint-cli2",
                 "Eon*/**/*.md",
+                "!Eon.Tests/**/__examples__/*.md",
                 "*.md",
                 "!LICENSE.md"
             ]

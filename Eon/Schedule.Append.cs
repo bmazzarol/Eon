@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -10,7 +8,6 @@ public abstract partial record Schedule
     /// <param name="first">first <see cref="Schedule"/></param>
     /// <param name="second">second <see cref="Schedule"/></param>
     /// <returns>the two <see cref="Schedule"/> appended</returns>
-    [Pure]
     public static Schedule operator +(Schedule first, Schedule second) => first.Append(second);
 
     /// <summary>
@@ -18,7 +15,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="other">other <see cref="Schedule"/></param>
     /// <returns>the two <see cref="Schedule"/> appended</returns>
-    [Pure]
     public Schedule Append(Schedule other) => new SchAppend(this, other);
 
     /// <summary>

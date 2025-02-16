@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -14,8 +12,7 @@ public abstract partial record Schedule
     /// </remarks>
     /// <param name="factor">jitter factor based on the returned delay</param>
     /// <param name="seed">optional seed</param>
-    [Pure]
-    public static ScheduleTransformer Decorrelate(double factor = 0.1, int? seed = default) =>
+    public static ScheduleTransformer Decorrelate(double factor = 0.1, int? seed = null) =>
         Transform(s => new SchDecorrelate(s, factor, seed));
 
     private sealed record SchDecorrelate(Schedule Schedule, double Factor, int? Seed) : Schedule

@@ -4,9 +4,9 @@ items:
   - name: Getting Started
     href: articles/getting-started.md
   - name: How To
-    href: articles/how-to/toc.yml
+    href: articles/how-to/
   - name: Components
-    href: articles/components/toc.yml
+    href: articles/components/
   - name: .NET API Docs
-    href: api/toc.yml
+    href: api/
     expanded: true

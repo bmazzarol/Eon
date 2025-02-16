@@ -8,9 +8,13 @@ Using the <xref:Eon.Schedule.Intersect*> method,
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/IntersectTests.cs#Example1)]
 
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/IntersectTests.Case1.md)]
+
 Using the <xref:Eon.Schedule.op_BitwiseAnd*>,
 
 [!code-csharp[Example2](../../../Eon.Tests/Examples/IntersectTests.cs#Example2)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/IntersectTests.Case2.md)]
 
 The returned <xref:Eon.Schedule> will run as long as the shortest of the two
 <xref:Eon.Schedule>

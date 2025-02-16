@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -8,14 +6,12 @@ public abstract partial record Schedule
     /// <see cref="Schedule"/> constructor that recurs for the specified `durations`
     /// </summary>
     /// <param name="durations">durations to apply</param>
-    [Pure]
     public static Schedule From(params Duration[] durations) => new SchFrom(durations);
 
     /// <summary>
     /// <see cref="Schedule"/> constructor that recurs for the specified `durations`
     /// </summary>
     /// <param name="durations">durations to apply</param>
-    [Pure]
     public static Schedule From(IReadOnlyList<Duration> durations) => new SchFrom(durations);
 
     /// <summary>

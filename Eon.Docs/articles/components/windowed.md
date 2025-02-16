@@ -18,3 +18,5 @@ Produces,
 ```
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/WindowedTests.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/WindowedTests.Case1.md)]

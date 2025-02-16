@@ -29,7 +29,7 @@ internal static class RandomFactory
     /// Returns a random floating-point number that is greater than or equal to `a` and less than `b`
     /// </summary>
     [ExcludeFromCodeCoverage]
-    internal static double Uniform(double a, double b, int? seed = default)
+    internal static double Uniform(double a, double b, int? seed = null)
     {
         if (a.Equals(b))
         {

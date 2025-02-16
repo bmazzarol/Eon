@@ -5,3 +5,5 @@
 until either <xref:Eon.Schedule> completes
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/InterleaveTests.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/InterleaveTests.Case1.md)]

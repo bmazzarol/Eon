@@ -1,5 +1,14 @@
-﻿namespace Eon.Tests.Examples;
+﻿using System.Diagnostics.CodeAnalysis;
+using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
 
+namespace Eon.Tests.Examples;
+
+[SuppressMessage(
+    "Major Code Smell",
+    "S6562:Always set the \"DateTimeKind\" when creating new \"DateTime\" instances"
+)]
+[SuppressMessage("Design", "MA0132:Do not convert implicitly to DateTimeOffset")]
 public static class HourOfDayTests
 {
     [Fact(
@@ -9,28 +18,19 @@ public static class HourOfDayTests
     {
         #region Example1
 
-        var now = DateTimeOffset.MinValue;
-        Schedule hourOfDay = Schedule.HourOfDay(3, () => now);
+        DateTime[] dates =
+        [
+            new(2022, 1, 1, 1, 0, 0), // 1
+            new(2022, 1, 1, 4, 0, 0), // 4
+            new(2022, 1, 1, 6, 0, 0), // 6
+            new(2022, 1, 1, 3, 0, 0), // 3
+        ];
 
-        using var enumerator = hourOfDay.GetEnumerator();
-        now = new DateTime(2022, 1, 1, 1, 0, 0); // 1
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(2)); // 1 + 2 = 3
-        now = new DateTime(2022, 1, 1, 4, 0, 0); // 4
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(23)); // 4 + 23 = 27 - 24 = 3
-        now = new DateTime(2022, 1, 1, 6, 0, 0); // 6
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(21)); // 6 + 21 = 27 - 24 = 3
-        now = new DateTime(2022, 1, 1, 3, 0, 0); // 3
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(24)); // 3 + 24 = 27 - 24 = 3
-        enumerator.MoveNext().Should().BeTrue();
-
-        hourOfDay.CanCount.Should().BeFalse();
-        hourOfDay.Count.Should().BeNull();
+        Schedule hourOfDay = Schedule.HourOfDay(3, dates.ToTestProvider());
 
         #endregion
+
+        hourOfDay.RenderSchedule(dates, "f").SaveResults();
     }
 
     [Fact(DisplayName = "HourOfDay rounds hours greater than 24 to 24")]
@@ -39,11 +39,11 @@ public static class HourOfDayTests
         Schedule secondOfMinute = Schedule.HourOfDay(61, () => new DateTime(2022, 1, 1, 1, 0, 0));
 
         using var enumerator = secondOfMinute.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(22));
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(TimeSpan.FromHours(22), enumerator.Current);
 
-        secondOfMinute.CanCount.Should().BeFalse();
-        secondOfMinute.Count.Should().BeNull();
+        Assert.False(secondOfMinute.CanCount);
+        Assert.Null(secondOfMinute.Count);
     }
 
     [Fact(DisplayName = "HourOfDay rounds hours less than 0 to 0")]
@@ -52,10 +52,10 @@ public static class HourOfDayTests
         Schedule secondOfMinute = Schedule.HourOfDay(0, () => new DateTime(2022, 1, 1, 1, 0, 0));
 
         using var enumerator = secondOfMinute.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromHours(23));
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(TimeSpan.FromHours(23), enumerator.Current);
 
-        secondOfMinute.CanCount.Should().BeFalse();
-        secondOfMinute.Count.Should().BeNull();
+        Assert.False(secondOfMinute.CanCount);
+        Assert.Null(secondOfMinute.Count);
     }
 }

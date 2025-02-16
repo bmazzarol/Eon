@@ -6,6 +6,7 @@ public static class UpToTests
     public static void Case1()
     {
         #region Example1
+
         DateTimeOffset now = DateTimeOffset.UtcNow;
         Schedule upTo = Schedule.UpTo(
             TimeSpan.FromSeconds(5),
@@ -17,18 +18,18 @@ public static class UpToTests
         );
 
         using var enumerator = upTo.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(Duration.Zero);
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(Duration.Zero);
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(Duration.Zero);
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(Duration.Zero);
-        enumerator.MoveNext().Should().BeFalse();
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(TimeSpan.Zero, enumerator.Current);
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(TimeSpan.Zero, enumerator.Current);
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(TimeSpan.Zero, enumerator.Current);
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(TimeSpan.Zero, enumerator.Current);
+        Assert.False(enumerator.MoveNext());
 
-        upTo.CanCount.Should().BeFalse();
-        upTo.Count.Should().BeNull();
+        Assert.False(upTo.CanCount);
+        Assert.Null(upTo.Count);
 
         #endregion
     }
@@ -38,9 +39,10 @@ public static class UpToTests
     )]
     public static void Case2()
     {
-        Schedule
-            .LiveCurrentTimeFunction()
-            .Should()
-            .BeCloseTo(DateTimeOffset.UtcNow, TimeSpan.FromSeconds(1));
+        Assert.Equal(
+            DateTimeOffset.UtcNow,
+            Schedule.LiveCurrentTimeFunction(),
+            TimeSpan.FromSeconds(1)
+        );
     }
 }

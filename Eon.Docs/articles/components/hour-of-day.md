@@ -7,3 +7,5 @@ recurs every specified `hour` of each day
 > `hour` must be between 0 and 23. Any other value will be round down or up
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/HourOfDayTests.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/HourOfDayTests.Case1.md)]

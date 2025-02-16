@@ -20,6 +20,8 @@ only odd natural numbers in seconds to a provided `max`.
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/CustomOddNumbers.cs#Example1)]
 
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/CustomOddNumbers.Case1.md)]
+
 The logic is all within the GetEnumerator and `yield` and `break`
 make it trivial to build any <xref:Eon.Schedule>.
 
@@ -28,3 +30,5 @@ the Polly.NET [DecorrelatedJitterBackoffV2](https://github.com/App-vNext/Polly/b
 as a <xref:Eon.Schedule>
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/DecorrelatedJitterBackoffV2.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/DecorrelatedJitterBackoffV2.Case1.md)]

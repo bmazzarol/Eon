@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -9,7 +7,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="transform">transformation function</param>
     /// <returns><see cref="ScheduleTransformer"/></returns>
-    [Pure]
     public static ScheduleTransformer Transform(Func<Schedule, Schedule> transform) =>
         new(transform);
 
@@ -24,6 +21,5 @@ public abstract partial record Schedule
     /// A <see cref="ScheduleTransformer"/> that limits the schedule to run the specified number of `times`
     /// </summary>
     /// <param name="times">number of times to run the <see cref="Schedule"/></param>
-    [Pure]
     public static ScheduleTransformer Recurs(int times) => Transform(s => s.Take(times));
 }

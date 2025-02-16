@@ -7,3 +7,5 @@ recurs every specified `second` of each minute
 > `second` must be between 0 and 59. Any other value will be round down or up
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/SecondOfMinuteTests.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/SecondOfMinuteTests.Case1.md)]

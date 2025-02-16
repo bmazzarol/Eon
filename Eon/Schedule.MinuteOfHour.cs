@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -9,7 +7,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="minute">minute of the hour, will be rounded to fit between 0 and 59</param>
     /// <param name="currentTimeFunction">current time function</param>
-    [Pure]
     public static Schedule MinuteOfHour(
         uint minute,
         Func<DateTimeOffset>? currentTimeFunction = null

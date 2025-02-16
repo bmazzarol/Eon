@@ -5,3 +5,5 @@
 that runs twice as long
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/DecorrelateTests.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/DecorrelateTests.Case1.md)]

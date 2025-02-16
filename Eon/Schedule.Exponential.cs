@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
 namespace Eon;
 
@@ -10,7 +9,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="seed">seed</param>
     /// <param name="factor">optional factor to apply, defaults to 2</param>
-    [Pure]
     public static Schedule Exponential(Duration seed, double factor = 2) =>
         new SchExponential(seed, factor);
 
@@ -27,6 +25,10 @@ public abstract partial record Schedule
         public override bool CanCount => false;
 
         [SuppressMessage("Blocker Bug", "S2190:Loops and recursions should not be infinite")]
+        [SuppressMessage(
+            "Critical Code Smell",
+            "S1994:\"for\" loop increment clauses should modify the loops\' counters"
+        )]
         public override IEnumerator<Duration> GetEnumerator()
         {
             double seed = Seed;

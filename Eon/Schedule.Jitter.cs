@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -10,11 +8,10 @@ public abstract partial record Schedule
     /// <param name="minRandom">min random milliseconds</param>
     /// <param name="maxRandom">max random milliseconds</param>
     /// <param name="seed">optional seed</param>
-    [Pure]
     public static ScheduleTransformer Jitter(
         Duration minRandom,
         Duration maxRandom,
-        int? seed = default
+        int? seed = null
     ) => Transform(s => s.Select(x => x + RandomFactory.Uniform(minRandom, maxRandom, seed)));
 
     /// <summary>
@@ -22,7 +19,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="factor">jitter factor based on the returned delay</param>
     /// <param name="seed">optional seed</param>
-    [Pure]
-    public static ScheduleTransformer Jitter(double factor = 0.5, int? seed = default) =>
+    public static ScheduleTransformer Jitter(double factor = 0.5, int? seed = null) =>
         Transform(s => s.Select(x => x + RandomFactory.Uniform(0, x * factor, seed)));
 }

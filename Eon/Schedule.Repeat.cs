@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -8,7 +6,6 @@ public abstract partial record Schedule
     /// A <see cref="ScheduleTransformer"/> that repeats the <see cref="Schedule"/> a given number of `times`
     /// </summary>
     /// <param name="times">number of times to repeat the <see cref="Schedule"/></param>
-    [Pure]
     public static ScheduleTransformer Repeat(int times) => Transform(s => new SchRepeat(s, times));
 
     private sealed record SchRepeat(Schedule Schedule, int Times) : Schedule

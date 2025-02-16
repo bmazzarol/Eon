@@ -1,4 +1,9 @@
-﻿namespace Eon.Tests.Examples;
+﻿using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
+
+#pragma warning disable S127, S1994
+
+namespace Eon.Tests.Examples;
 
 #region Example1
 
@@ -33,20 +38,9 @@ public static class OddSecondsToMaxTests
     public static void Case1()
     {
         Schedule schedule = new OddSecondsToMax(10);
-        schedule
-            .Should()
-            .ContainInOrder(
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(3),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(7),
-                TimeSpan.FromSeconds(9),
-                TimeSpan.FromSeconds(11),
-                TimeSpan.FromSeconds(13),
-                TimeSpan.FromSeconds(15),
-                TimeSpan.FromSeconds(17)
-            );
-    }
-}
 
 #endregion
+
+        schedule.RenderSchedule().SaveResults();
+    }
+}

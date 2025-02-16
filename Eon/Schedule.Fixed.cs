@@ -1,16 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
 namespace Eon;
 
 public abstract partial record Schedule
 {
-    [Pure]
     private static Duration SecondsToIntervalStart(
         DateTimeOffset startTime,
         DateTimeOffset currentTime,
         Duration interval
-    ) => interval - (currentTime - startTime).TotalMilliseconds % interval;
+    ) => interval - ((currentTime - startTime).TotalMilliseconds % interval);
 
     /// <summary>
     /// <para><see cref="Schedule"/> that recurs on a fixed `interval`.</para>
@@ -25,7 +23,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="interval"><see cref="Schedule"/> interval</param>
     /// <param name="currentTimeFunction">current time function</param>
-    [Pure]
     public static Schedule Fixed(
         Duration interval,
         Func<DateTimeOffset>? currentTimeFunction = null

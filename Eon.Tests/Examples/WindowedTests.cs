@@ -1,4 +1,7 @@
-﻿namespace Eon.Tests.Examples;
+﻿using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
+
+namespace Eon.Tests.Examples;
 
 public static class WindowedTests
 {
@@ -6,7 +9,8 @@ public static class WindowedTests
     public static void Case1()
     {
         #region Example1
-        DateTimeOffset now = DateTimeOffset.UtcNow;
+
+        DateTimeOffset now = new DateTimeOffset(2021, 1, 1, 0, 0, 0, TimeSpan.Zero);
         using var dates = new[]
         {
             now,
@@ -22,17 +26,8 @@ public static class WindowedTests
             currentTimeFunction: () => dates.MoveNext() ? dates.Current : now
         );
 
-        using var enumerator = windowed.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(4));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(4));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-
-        windowed.CanCount.Should().BeFalse();
-        windowed.Count.Should().BeNull();
-
         #endregion
+
+        windowed.RenderSchedule().SaveResults();
     }
 }

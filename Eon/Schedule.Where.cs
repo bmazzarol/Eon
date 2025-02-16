@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -9,7 +7,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="predicate">predicate to apply to each <see cref="Duration"/> emitted</param>
     /// <returns>filtered <see cref="Schedule"/></returns>
-    [Pure]
     public Schedule Where(Func<Duration, bool> predicate) => new SchWhere(this, predicate);
 
     /// <summary>

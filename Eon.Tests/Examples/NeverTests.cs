@@ -6,13 +6,15 @@ public static class NeverTests
     public static void Case1()
     {
         #region Example1
+
         Schedule never = Schedule.Never;
 
         using var enumerator = never.GetEnumerator();
-        enumerator.MoveNext().Should().BeFalse();
 
-        never.CanCount.Should().BeTrue();
-        never.Count.Should().Be(0);
+        Assert.False(enumerator.MoveNext());
+
+        Assert.True(never.CanCount);
+        Assert.Equal(0, never.Count);
 
         #endregion
     }

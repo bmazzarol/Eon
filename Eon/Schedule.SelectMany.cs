@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -10,7 +8,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="bind">projection from <see cref="Duration"/> to <see cref="Schedule"/></param>
     /// <returns>chained <see cref="Schedule"/></returns>
-    [Pure]
     public Schedule SelectMany(Func<Duration, Schedule> bind) =>
         new SchSelectMany(this, bind, static (_, duration) => duration);
 
@@ -22,7 +19,6 @@ public abstract partial record Schedule
     /// <param name="bind">projection from <see cref="Duration"/> to <see cref="Schedule"/></param>
     /// <param name="projection"></param>
     /// <returns>chained <see cref="Schedule"/>projection from <see cref="Duration"/>, <see cref="Duration"/> to <see cref="Duration"/></returns>
-    [Pure]
     public Schedule SelectMany(
         Func<Duration, Schedule> bind,
         Func<Duration, Duration, Duration> projection

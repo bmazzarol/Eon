@@ -10,7 +10,7 @@ public static class ForeverTests
         // Forever be used as a looping construct
         foreach (Duration duration in Schedule.Forever)
         {
-            duration.Should().Be(Duration.Zero);
+            Assert.True(duration == Duration.Zero);
             count++;
             if (count == 10)
             {
@@ -29,10 +29,10 @@ public static class ForeverTests
         Schedule forever = Schedule.Forever;
         Schedule result = forever.Take(10);
 
-        forever.CanCount.Should().BeFalse();
-        forever.Count.Should().BeNull();
+        Assert.False(forever.CanCount);
+        Assert.Null(forever.Count);
 
-        result.Should().HaveCount(10).And.OnlyContain(x => x == Duration.Zero);
+        Assert.Contains(result, x => x == Duration.Zero);
 
         #endregion
     }

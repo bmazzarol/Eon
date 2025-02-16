@@ -4,3 +4,5 @@
 recurs every specified `day` of each week
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/DayOfWeekTests.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/DayOfWeekTests.Case1.md)]

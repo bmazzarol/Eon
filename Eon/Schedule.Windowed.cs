@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
 namespace Eon;
 
@@ -19,7 +18,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="interval"><see cref="Schedule"/> interval</param>
     /// <param name="currentTimeFunction">current time function</param>
-    [Pure]
     public static Schedule Windowed(
         Duration interval,
         Func<DateTimeOffset>? currentTimeFunction = null

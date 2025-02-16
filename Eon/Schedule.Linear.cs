@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
 namespace Eon;
 
@@ -10,7 +9,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="seed">seed</param>
     /// <param name="factor">optional factor to apply, defaults to 1</param>
-    [Pure]
     public static Schedule Linear(Duration seed, double factor = 1) => new SchLinear(seed, factor);
 
     /// <summary>

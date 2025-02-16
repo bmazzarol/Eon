@@ -1,4 +1,7 @@
-﻿namespace Eon.Tests.Examples;
+﻿using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
+
+namespace Eon.Tests.Examples;
 
 public static class SelectManyTests
 {
@@ -6,6 +9,7 @@ public static class SelectManyTests
     public static void Case1()
     {
         #region Example1
+
         Schedule selectMany = Schedule
             .Linear(TimeSpan.FromSeconds(1))
             .Take(2)
@@ -13,22 +17,10 @@ public static class SelectManyTests
                 bind: _ => Schedule.From(TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1)),
                 projection: (first, second) => first + second
             );
-        selectMany.Should().HaveCount(4);
-        using var enumerator = selectMany.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(3));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(4));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(3));
-        enumerator.MoveNext().Should().BeFalse();
-
-        selectMany.CanCount.Should().BeTrue();
-        selectMany.Count.Should().Be(4);
 
         #endregion
+
+        selectMany.RenderSchedule().SaveResults();
     }
 
     [Fact(DisplayName = "SelectMany LINQ expression transforms durations in a schedule")]
@@ -41,19 +33,9 @@ public static class SelectManyTests
             from twoThenOne in Schedule.From(TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1))
             select linear + twoThenOne;
 
-        selectMany.Should().HaveCount(4);
-        using var enumerator = selectMany.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(3));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(4));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(3));
-        enumerator.MoveNext().Should().BeFalse();
-
         #endregion
+
+        selectMany.RenderSchedule().SaveResults();
     }
 
     [Fact(
@@ -67,19 +49,8 @@ public static class SelectManyTests
             .Linear(TimeSpan.FromSeconds(1))
             .SelectMany(_ => Schedule.From(TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1)));
 
-        using var enumerator = selectMany.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-
-        selectMany.CanCount.Should().BeFalse();
-        selectMany.Count.Should().BeNull();
-
         #endregion
+
+        selectMany.RenderSchedule().SaveResults();
     }
 }

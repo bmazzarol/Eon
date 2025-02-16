@@ -6,15 +6,16 @@ public static class OnceTests
     public static void Case1()
     {
         #region Example1
+
         Schedule once = Schedule.Once;
 
         using var enumerator = once.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(Duration.Zero);
-        enumerator.MoveNext().Should().BeFalse();
+        Assert.True(enumerator.MoveNext());
+        Assert.Equal(Duration.Zero, enumerator.Current);
+        Assert.False(enumerator.MoveNext());
 
-        once.CanCount.Should().BeTrue();
-        once.Count.Should().Be(1);
+        Assert.True(once.CanCount);
+        Assert.Equal(1, once.Count);
 
         #endregion
     }

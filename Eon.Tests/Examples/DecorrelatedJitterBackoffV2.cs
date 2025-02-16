@@ -1,4 +1,9 @@
-﻿namespace Eon.Tests.Examples;
+﻿using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
+
+#pragma warning disable S2190, S1994
+
+namespace Eon.Tests.Examples;
 
 #region Example1
 
@@ -60,22 +65,9 @@ public static class DecorrelatedJitterBackoffV2Tests
             TimeSpan.FromSeconds(1),
             () => seededRandom.NextDouble()
         ).Take(10);
-        schedule
-            .Select(x => x.ToString())
-            .Should()
-            .ContainInConsecutiveOrder(
-                "Duration(00:00:00.6650427)",
-                "Duration(00:00:00.8275104)",
-                "Duration(00:00:01.4038789)",
-                "Duration(00:00:04.4717195)",
-                "Duration(00:00:12.9353367)",
-                "Duration(00:00:11.7150076)",
-                "Duration(00:00:20.2590917)",
-                "Duration(00:01:07.6758225)",
-                "Duration(00:02:27.1149322)",
-                "Duration(00:06:13.7526914)"
-            );
-    }
-}
 
 #endregion
+
+        schedule.RenderSchedule().SaveResults();
+    }
+}

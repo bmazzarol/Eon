@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -10,7 +8,6 @@ public abstract partial record Schedule
     /// <remarks>If `this` <see cref="Schedule"/> has less emissions than `count` it completes early</remarks>
     /// <param name="count">amount of <see cref="Duration"/> to take</param>
     /// <returns><see cref="Schedule"/> with `count` or less<see cref="Duration"/></returns>
-    [Pure]
     public Schedule Take(int count) => new SchTake(this, count);
 
     /// <summary>

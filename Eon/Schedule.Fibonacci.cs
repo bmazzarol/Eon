@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
 namespace Eon;
 
@@ -9,7 +8,6 @@ public abstract partial record Schedule
     /// <see cref="Schedule"/> that recurs continuously using a fibonacci based backoff
     /// </summary>
     /// <param name="seed">seed</param>
-    [Pure]
     public static Schedule Fibonacci(Duration seed) => new SchFibonacci(seed);
 
     /// <summary>

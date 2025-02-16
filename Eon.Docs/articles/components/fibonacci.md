@@ -6,3 +6,5 @@ a [fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence) from a
 starting `seed` <xref:Eon.Duration>
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/FibonacciTests.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/FibonacciTests.Case1.md)]

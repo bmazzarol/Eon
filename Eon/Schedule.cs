@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
 namespace Eon;
 
@@ -26,7 +25,6 @@ public abstract partial record Schedule : IEnumerable<Duration>
     /// Realise the underlying time-series of <see cref="Duration"/>
     /// </summary>
     /// <returns>The underlying time-series of <see cref="Duration"/></returns>
-    [Pure]
     public abstract IEnumerator<Duration> GetEnumerator();
 
     [ExcludeFromCodeCoverage]
@@ -37,7 +35,7 @@ public abstract partial record Schedule : IEnumerable<Duration>
 
     private readonly object _lock = new();
     private int _position;
-    private Duration[] _buffer = Array.Empty<Duration>();
+    private Duration[] _buffer = [];
     private IEnumerator<Duration>? _enumerator;
 
     /// <summary>
@@ -50,7 +48,7 @@ public abstract partial record Schedule : IEnumerable<Duration>
     /// take delegate based back-off algorithms</remarks>
     /// <param name="index">index</param>
     /// <exception cref="IndexOutOfRangeException">when the <see cref="Schedule"/> has
-    /// less emissions than the provided `index`</exception>
+    /// fewer emissions than the provided `index`</exception>
     public Duration this[int index]
     {
         get

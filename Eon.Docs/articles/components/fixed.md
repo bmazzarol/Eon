@@ -14,3 +14,5 @@ then a <xref:Eon.Duration.Zero> will be emitted, so re-runs will not
 ```
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/FixedTests.cs#Example1)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/FixedTests.Case1.md)]

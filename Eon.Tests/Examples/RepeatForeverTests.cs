@@ -1,4 +1,7 @@
-﻿namespace Eon.Tests.Examples;
+﻿using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
+
+namespace Eon.Tests.Examples;
 
 public static class RepeatForeverTests
 {
@@ -6,24 +9,13 @@ public static class RepeatForeverTests
     public static void Case1()
     {
         #region Example1
+
         Schedule repeatForever =
             Schedule.From(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2))
             & Schedule.RepeatForever;
 
-        using var enumerator = repeatForever.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
-        enumerator.MoveNext().Should().BeTrue();
-
-        repeatForever.CanCount.Should().BeFalse();
-        repeatForever.Count.Should().BeNull();
-
         #endregion
+
+        repeatForever.RenderSchedule().SaveResults();
     }
 }

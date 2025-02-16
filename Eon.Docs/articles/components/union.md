@@ -8,9 +8,13 @@ Using the <xref:Eon.Schedule.Union*> method,
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/UnionTests.cs#Example1)]
 
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/UnionTests.Case1.md)]
+
 Using the <xref:Eon.Schedule.op_BitwiseOr*>,
 
 [!code-csharp[Example2](../../../Eon.Tests/Examples/UnionTests.cs#Example2)]
+
+[!INCLUDE[](../../../Eon.Tests/Examples/__examples__/UnionTests.Case2.md)]
 
 The returned <xref:Eon.Schedule> will run as long as the longest of the two
 <xref:Eon.Schedule>,

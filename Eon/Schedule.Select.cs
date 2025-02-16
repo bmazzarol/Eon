@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Eon;
 
@@ -9,7 +9,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="projection">projection function from <see cref="Duration"/> to <see cref="Duration"/></param>
     /// <returns>transformed <see cref="Schedule"/></returns>
-    [Pure]
     public Schedule Select(Func<Duration, Duration> projection) => new SchSelect(this, projection);
 
     /// <summary>
@@ -17,7 +16,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="projection">projection function from <see cref="Duration"/> index to <see cref="Duration"/></param>
     /// <returns>transformed <see cref="Schedule"/></returns>
-    [Pure]
     public Schedule Select(Func<Duration, int, Duration> projection) =>
         new SchSelectIndex(this, projection);
 
@@ -55,6 +53,10 @@ public abstract partial record Schedule
         public override int? Count => Schedule.Count;
         public override bool CanCount => Schedule.CanCount;
 
+        [SuppressMessage(
+            "Critical Code Smell",
+            "S1994:\"for\" loop increment clauses should modify the loops\' counters"
+        )]
         public override IEnumerator<Duration> GetEnumerator()
         {
             using var enumerator = Schedule.GetEnumerator();

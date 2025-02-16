@@ -1,4 +1,7 @@
-﻿namespace Eon.Tests.Examples;
+﻿using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
+
+namespace Eon.Tests.Examples;
 
 public static class ExponentialTests
 {
@@ -6,23 +9,12 @@ public static class ExponentialTests
     public static void Case1()
     {
         #region Example1
+
         Schedule exponential = Schedule.Exponential(TimeSpan.FromSeconds(1)).Take(4);
 
-        using var enumerator = exponential.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(4));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(8));
-        enumerator.MoveNext().Should().BeFalse();
-
-        exponential.CanCount.Should().BeTrue();
-        exponential.Count.Should().Be(4);
-
         #endregion
+
+        exponential.RenderSchedule().SaveResults();
     }
 
     [Fact(
@@ -34,19 +26,8 @@ public static class ExponentialTests
 
         Schedule exponential = Schedule.Exponential(TimeSpan.FromSeconds(1), factor: 3);
 
-        using var enumerator = exponential.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(2));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(5));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(14));
-
-        exponential.CanCount.Should().BeFalse();
-        exponential.Count.Should().BeNull();
-
         #endregion
+
+        exponential.RenderSchedule().SaveResults();
     }
 }

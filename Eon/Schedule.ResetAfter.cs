@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
 namespace Eon;
 
@@ -9,7 +8,6 @@ public abstract partial record Schedule
     /// Resets the <see cref="Schedule"/> after a provided cumulative `max` <see cref="Duration"/>
     /// </summary>
     /// <param name="max">`max` <see cref="Duration"/> to reset the schedule after</param>
-    [Pure]
     public static ScheduleTransformer ResetAfter(Duration max) =>
         Transform(s => new SchResetAfter(s, max));
 

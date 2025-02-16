@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -9,7 +7,6 @@ public abstract partial record Schedule
     /// <see cref="Schedule"/>`s emissions between each emission in the <see cref="Schedule"/>
     /// </summary>
     /// <param name="schedule"><see cref="Schedule"/> to intersperse</param>
-    [Pure]
     public static ScheduleTransformer Intersperse(Schedule schedule) =>
         Transform(s => s.SelectMany(schedule.Prepend));
 }

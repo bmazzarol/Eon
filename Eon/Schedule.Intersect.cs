@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -10,7 +8,6 @@ public abstract partial record Schedule
     /// <param name="first">first <see cref="Schedule"/></param>
     /// <param name="second">second <see cref="Schedule"/></param>
     /// <returns>intersect of the two <see cref="Schedule"/></returns>
-    [Pure]
     public static Schedule operator &(Schedule first, Schedule second) => first.Intersect(second);
 
     /// <summary>
@@ -19,7 +16,6 @@ public abstract partial record Schedule
     /// <param name="schedule"><see cref="Schedule"/></param>
     /// <param name="transformer"><see cref="ScheduleTransformer"/></param>
     /// <returns>intersect of a <see cref="Schedule"/> and a <see cref="ScheduleTransformer"/></returns>
-    [Pure]
     public static Schedule operator &(Schedule schedule, ScheduleTransformer transformer) =>
         transformer.Apply(schedule);
 
@@ -29,7 +25,6 @@ public abstract partial record Schedule
     /// <param name="transformer"><see cref="ScheduleTransformer"/></param>
     /// <param name="schedule"><see cref="Schedule"/></param>
     /// <returns>intersect of a <see cref="ScheduleTransformer"/> and a <see cref="Schedule"/></returns>
-    [Pure]
     public static Schedule operator &(ScheduleTransformer transformer, Schedule schedule) =>
         transformer.Apply(schedule);
 
@@ -40,7 +35,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="other">other <see cref="Schedule"/></param>
     /// <returns>intersection of `this` <see cref="Schedule"/> and the `other` <see cref="Schedule"/></returns>
-    [Pure]
     public Schedule Intersect(Schedule other) => new SchIntersect(this, other);
 
     /// <summary>

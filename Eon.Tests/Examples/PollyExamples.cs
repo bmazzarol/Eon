@@ -22,16 +22,20 @@ public static class PollyExamples
         };
         ResiliencePipeline pipeline = new ResiliencePipelineBuilder().AddRetry(options).Build();
         int attempts = 0;
-        await pipeline.ExecuteAsync(async token =>
-        {
-            await Task.Yield();
-            attempts++;
-            if (attempts < 5)
+        await pipeline.ExecuteAsync(
+            async _ =>
             {
-                throw new Exception();
-            }
-        });
-        attempts.Should().Be(5);
+                await Task.Yield();
+                attempts++;
+                if (attempts < 5)
+                {
+                    throw new InvalidOperationException();
+                }
+            },
+            TestContext.Current.CancellationToken
+        );
+
+        Assert.Equal(5, attempts);
 
         #endregion
     }
@@ -53,16 +57,20 @@ public static class PollyExamples
         };
         ResiliencePipeline pipeline = new ResiliencePipelineBuilder().AddRetry(options).Build();
         int attempts = 0;
-        await pipeline.ExecuteAsync(async token =>
-        {
-            await Task.Yield();
-            attempts++;
-            if (attempts < 10)
+        await pipeline.ExecuteAsync(
+            async _ =>
             {
-                throw new Exception();
-            }
-        });
-        attempts.Should().Be(10);
+                await Task.Yield();
+                attempts++;
+                if (attempts < 10)
+                {
+                    throw new InvalidOperationException();
+                }
+            },
+            TestContext.Current.CancellationToken
+        );
+
+        Assert.Equal(10, attempts);
 
         #endregion
     }

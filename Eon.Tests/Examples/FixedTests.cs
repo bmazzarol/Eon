@@ -1,4 +1,7 @@
-﻿namespace Eon.Tests.Examples;
+﻿using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
+
+namespace Eon.Tests.Examples;
 
 public static class FixedTests
 {
@@ -22,17 +25,8 @@ public static class FixedTests
             currentTimeFunction: () => dates.MoveNext() ? dates.Current : now
         );
 
-        using var enumerator = @fixed.GetEnumerator();
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(Duration.Zero);
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(4));
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromSeconds(1));
-
-        @fixed.CanCount.Should().BeFalse();
-        @fixed.Count.Should().BeNull();
-
         #endregion
+
+        @fixed.RenderSchedule().SaveResults();
     }
 }

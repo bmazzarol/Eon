@@ -1,4 +1,9 @@
-﻿namespace Eon.Tests.Examples;
+﻿using Docfx.ResultSnippets;
+using Eon.Tests.Extensions;
+
+#pragma warning disable MA0132, S6562
+
+namespace Eon.Tests.Examples;
 
 public static class DayOfWeekTests
 {
@@ -9,27 +14,21 @@ public static class DayOfWeekTests
     {
         #region Example1
 
-        var now = DateTimeOffset.MinValue;
-        Schedule hourOfDay = Schedule.DayOfWeek(DayOfWeek.Monday, () => now);
+        DateTime[] dates =
+        [
+            new(2022, 1, 1), // Saturday
+            new(2022, 1, 2), // Sunday
+            new(2022, 1, 3), // Monday
+            new(2022, 1, 4), // Tuesday
+            new(2022, 1, 5), // Wednesday
+            new(2022, 1, 6), // Thursday
+            new(2022, 1, 7), // Friday
+        ];
 
-        using var enumerator = hourOfDay.GetEnumerator();
-        now = new DateTime(2022, 1, 1, 0, 0, 0); // Saturday
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromDays(2)); // Saturday + 2 Days = Monday
-        now = new DateTime(2022, 1, 3, 0, 0, 0); // Monday
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromDays(7)); // Monday + 7 Days = Monday
-        now = new DateTime(2022, 1, 7, 0, 0, 0); // Friday
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromDays(3)); // Friday + 3 Days = Monday
-        now = new DateTime(2022, 1, 5, 0, 0, 0); // Wednesday
-        enumerator.MoveNext().Should().BeTrue();
-        enumerator.Current.Should().Be(TimeSpan.FromDays(5)); // Wednesday + 5 Days = Monday
-        enumerator.MoveNext().Should().BeTrue();
-
-        hourOfDay.CanCount.Should().BeFalse();
-        hourOfDay.Count.Should().BeNull();
+        Schedule hourOfDay = Schedule.DayOfWeek(DayOfWeek.Monday, dates.ToTestProvider());
 
         #endregion
+
+        hourOfDay.RenderSchedule(dates, "dddd MM").SaveResults();
     }
 }

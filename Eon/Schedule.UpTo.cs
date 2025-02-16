@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -14,7 +12,6 @@ public abstract partial record Schedule
     /// <remarks>It behaves like a <see cref="Forever"/> with a deadline</remarks>
     /// <param name="max">max <see cref="Duration"/> to run the <see cref="Schedule"/> for</param>
     /// <param name="currentTimeFunction">current time function</param>
-    [Pure]
     public static Schedule UpTo(Duration max, Func<DateTimeOffset>? currentTimeFunction = null) =>
         new SchUpTo(max, currentTimeFunction);
 

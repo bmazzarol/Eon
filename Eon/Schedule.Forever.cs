@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
 namespace Eon;
 
@@ -19,7 +18,6 @@ public abstract partial record Schedule
     /// <see cref="Schedule"/> that recurs continuously with the given spacing
     /// </summary>
     /// <param name="space">space</param>
-    [Pure]
     public static Schedule Spaced(Duration space) => new SchForever(space);
 
     /// <summary>

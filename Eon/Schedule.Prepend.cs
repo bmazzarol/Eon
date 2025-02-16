@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -9,7 +7,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="value"><see cref="Duration"/> to prepend</param>
     /// <returns><see cref="Schedule"/> with the `value` <see cref="Duration"/> prepended</returns>
-    [Pure]
     public Schedule Prepend(Duration value) => new SchPrepend(value, this);
 
     /// <summary>

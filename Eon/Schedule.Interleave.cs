@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -11,7 +9,6 @@ public abstract partial record Schedule
     /// </summary>
     /// <param name="other">other <see cref="Schedule"/></param>
     /// <returns>interleaves the two <see cref="Schedule"/> together</returns>
-    [Pure]
     public Schedule Interleave(Schedule other) => new SchInterleave(this, other);
 
     /// <summary>

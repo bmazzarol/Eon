@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace Eon;
 
@@ -36,7 +35,7 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="min">min duration</param>
     /// <param name="max">max duration</param>
     /// <param name="seed">optional seed</param>
-    public static Duration Random(in Duration min, in Duration max, int? seed = default) =>
+    public static Duration Random(in Duration min, in Duration max, int? seed = null) =>
         RandomFactory.Uniform(min, max, seed);
 
     /// <summary>
@@ -44,7 +43,6 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// </summary>
     /// <param name="milliseconds">milliseconds</param>
     /// <returns>duration</returns>
-    [Pure]
     public static implicit operator Duration(double milliseconds) =>
         TimeSpan.FromMilliseconds(milliseconds);
 
@@ -53,15 +51,19 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// </summary>
     /// <param name="timeSpan">time span</param>
     /// <returns>duration</returns>
-    [Pure]
     public static implicit operator Duration(TimeSpan timeSpan) => new(timeSpan);
+
+    /// <summary>
+    /// Converts a <see cref="Duration"/> to is underlying <see cref="System.TimeSpan"/>
+    /// </summary>
+    /// <returns>time span</returns>
+    public TimeSpan AsTimeSpan() => _timeSpan;
 
     /// <summary>
     /// Converts a <see cref="Duration"/> to a <see cref="double"/>
     /// </summary>
     /// <param name="duration">duration</param>
     /// <returns>milliseconds</returns>
-    [Pure]
     public static implicit operator double(in Duration duration) =>
         duration._timeSpan.TotalMilliseconds;
 
@@ -70,7 +72,6 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// </summary>
     /// <param name="duration">duration</param>
     /// <returns>timespan</returns>
-    [Pure]
     public static explicit operator TimeSpan(in Duration duration) => duration._timeSpan;
 
     /// <summary>
@@ -80,11 +81,9 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// </summary>
     /// <param name="other">other <see cref="Duration"/></param>
     /// <returns>integer which is either less than 0, 0 or greater than 0</returns>
-    [Pure]
     private int CompareToInternal(in Duration other) => _timeSpan.CompareTo(other._timeSpan);
 
     /// <inheritdoc />
-    [Pure]
     public int CompareTo(Duration other) => CompareToInternal(other);
 
     /// <summary>
@@ -93,7 +92,6 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="first">first <see cref="Duration"/></param>
     /// <param name="second">second <see cref="Duration"/></param>
     /// <returns>true if `first` is greater than `second`</returns>
-    [Pure]
     public static bool operator >(in Duration first, in Duration second) =>
         first.CompareToInternal(second) > 0;
 
@@ -103,7 +101,6 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="first">first <see cref="Duration"/></param>
     /// <param name="second">second <see cref="Duration"/></param>
     /// <returns>true if `first` is greater than or equal to the `second`</returns>
-    [Pure]
     public static bool operator >=(in Duration first, in Duration second) =>
         first.CompareToInternal(second) >= 0;
 
@@ -113,7 +110,6 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="first">first <see cref="Duration"/></param>
     /// <param name="second">second <see cref="Duration"/></param>
     /// <returns>true if `first` is less than `second`</returns>
-    [Pure]
     public static bool operator <(in Duration first, in Duration second) =>
         first.CompareToInternal(second) < 0;
 
@@ -123,7 +119,6 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="first">first <see cref="Duration"/></param>
     /// <param name="second">second <see cref="Duration"/></param>
     /// <returns>true if `first` is less than or equal to the `second`</returns>
-    [Pure]
     public static bool operator <=(in Duration first, in Duration second) =>
         first.CompareToInternal(second) <= 0;
 
@@ -133,7 +128,6 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="first">first <see cref="Duration"/></param>
     /// <param name="second">second <see cref="Duration"/></param>
     /// <returns>true if the `first` is equal to the `second`</returns>
-    [Pure]
     public static bool operator ==(in Duration first, in Duration second) =>
         first._timeSpan.Equals(second._timeSpan);
 
@@ -143,20 +137,16 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     /// <param name="first">first <see cref="Duration"/></param>
     /// <param name="second">second <see cref="Duration"/></param>
     /// <returns>true if the `first` is not equal to the `second`</returns>
-    [Pure]
     public static bool operator !=(in Duration first, in Duration second) =>
         !first._timeSpan.Equals(second._timeSpan);
 
     /// <inheritdoc />
-    [Pure]
     public bool Equals(Duration other) => _timeSpan.Equals(other._timeSpan);
 
     /// <inheritdoc />
-    [Pure]
     public override bool Equals(object? obj) => obj is Duration other && Equals(other);
 
     /// <inheritdoc />
-    [Pure]
     public override int GetHashCode() => _timeSpan.GetHashCode();
 
     /// <summary>
@@ -166,6 +156,5 @@ public readonly struct Duration : IEquatable<Duration>, IComparable<Duration>
     public TaskAwaiter GetAwaiter() => Task.Delay(_timeSpan).GetAwaiter();
 
     /// <inheritdoc />
-    [Pure]
     public override string ToString() => $"{nameof(Duration)}({_timeSpan.ToString()})";
 }

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 /// <summary>
 /// Transforms a <see cref="Schedule"/> into another <see cref="Schedule"/>
@@ -34,7 +32,6 @@ public readonly struct ScheduleTransformer
     /// <param name="f">first <see cref="ScheduleTransformer"/> to run in the composition</param>
     /// <param name="g">second <see cref="ScheduleTransformer"/> to run in the composition</param>
     /// <returns>composition of the 2 <see cref="ScheduleTransformer"/></returns>
-    [Pure]
     public static ScheduleTransformer operator +(ScheduleTransformer f, ScheduleTransformer g) =>
         new(x => g.Apply(f.Apply(x)));
 

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Eon;
+﻿namespace Eon;
 
 public abstract partial record Schedule
 {
@@ -8,7 +6,6 @@ public abstract partial record Schedule
     /// A <see cref="Schedule"/> transformer that places a `max` cumulative ceiling on the returned delays
     /// </summary>
     /// <param name="max">max cumulative delay</param>
-    [Pure]
     public static ScheduleTransformer MaxCumulativeDelay(Duration max) =>
         Transform(s => new SchMaxCumulativeDelay(s, max));
 

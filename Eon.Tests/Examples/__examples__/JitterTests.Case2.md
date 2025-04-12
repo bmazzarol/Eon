@@ -1,7 +1,7 @@
 |Duration|
 |-|
-|1 second, 125 milliseconds|
-|2 seconds, 909 milliseconds|
-|3 seconds, 61 milliseconds|
-|4 seconds, 278 milliseconds|
-|6 seconds, 709 milliseconds|
+|1 second, 242 milliseconds|
+|2 seconds, 620 milliseconds|
+|3 seconds, 805 milliseconds|
+|5 seconds, 48 milliseconds|
+|6 seconds, 468 milliseconds|

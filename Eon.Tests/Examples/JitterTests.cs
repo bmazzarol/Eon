@@ -28,7 +28,8 @@ public static class JitterTest
     {
         #region Example2
 
-        Schedule jitter = Schedule.Linear(TimeSpan.FromSeconds(1)) & Schedule.Jitter(factor: 0.5);
+        Schedule jitter =
+            Schedule.Linear(TimeSpan.FromSeconds(1)) & Schedule.Jitter(factor: 0.5, seed: 12345678);
 
         #endregion
 

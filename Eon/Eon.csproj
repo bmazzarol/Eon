@@ -1,19 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <Import Project="$([MSBuild]::GetPathOfFileAbove('Common.Release.props', '$(MSBuildThisFileDirectory)'))"/>
-
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <Title>Eon</Title>
-        <Description>Simple Schedule builder</Description>
-        <PackageTags>C#, Schedule</PackageTags>
-        <PackageProjectUrl>https://bmazzarol.github.io/Eon</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/bmazzarol/Eon</RepositoryUrl>
-        <PackageIcon>schedule-icon.png</PackageIcon>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <None Include="..\schedule-icon.png" Pack="true" PackagePath="\" />
-    </ItemGroup>
-
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Common.Release.props', '$(MSBuildThisFileDirectory)'))" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>Eon</Title>
+    <Description>Simple Schedule builder</Description>
+    <PackageTags>C#, Schedule</PackageTags>
+    <PackageProjectUrl>https://bmazzarol.github.io/Eon</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/bmazzarol/Eon</RepositoryUrl>
+    <PackageIcon>schedule-icon.png</PackageIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\schedule-icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>

@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <Import Project="$([MSBuild]::GetPathOfFileAbove('Common.Test.props', '$(MSBuildThisFileDirectory)'))"/>
-
-    <ItemGroup>
-        <PackageReference Include="Humanizer.Core" />
-        <PackageReference Include="Polly" />
-        <PackageReference Include="Docfx.ResultSnippets" Condition="$(BuiltInMonoRepo) != 'true'"/>
-        <ProjectReference Include="..\..\docfx.result-snippets\Docfx.ResultSnippets\Docfx.ResultSnippets.csproj" Condition="$(BuiltInMonoRepo) == 'true'" />
-    </ItemGroup>
-    
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Common.Test.props', '$(MSBuildThisFileDirectory)'))" />
+  <ItemGroup>
+    <PackageReference Include="Humanizer.Core" />
+    <PackageReference Include="Polly" />
+    <PackageReference Include="Docfx.ResultSnippets" Condition="$(BuiltInMonoRepo) != 'true'" />
+    <ProjectReference
+      Include="..\..\docfx.result-snippets\Docfx.ResultSnippets\Docfx.ResultSnippets.csproj"
+      Condition="$(BuiltInMonoRepo) == 'true'"
+    />
+  </ItemGroup>
 </Project>

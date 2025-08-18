@@ -31,7 +31,7 @@ comes paired with a simple language; crontab that is used to define how the
 job is to be repeated.
 
 Eon exposes a type called `Schedule`, that is a modern alternative
-to Cron, that is not concerned with how it's executed, just the cadence at which
+to Cron. It is not concerned with how it's executed; only the cadence at which
 an execution engine could run it.
 
 It's an immutable blueprint; a potentially infinite stream of durations that

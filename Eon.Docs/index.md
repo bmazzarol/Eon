@@ -60,7 +60,7 @@ simple building blocks reducing the need to extend <xref:Eon.Schedule>
 directly. Eon exposes many of these combinators, which are documented here.
 
 However, if it's required, it is as simple as writing a custom
-<xref:System.Collections.Generic.IEnumerable`1> of <xref:Eon.Duration>.
+<xref:System.Collections.Generic.IEnumerable{Eon.Duration}>.
 
 For more details/information keep reading the docs or have a look at the test
 projects or create an issue.

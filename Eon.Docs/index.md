@@ -32,10 +32,10 @@ comes paired with a simple language; crontab that is used to define how the
 job is to be repeated.
 
 Eon exposes a type <xref:Eon.Schedule>, that is a modern alternative
-to Cron, that is not concerned with how its executed, just the cadence at which
+to Cron, that is not concerned with how it's executed, just the cadence at which
 an execution engine could run it.
 
-Its an immutable blueprint; a potentially infinite stream of <xref:Eon.Duration>
+It's an immutable blueprint; a potentially infinite stream of <xref:Eon.Duration>
 that can be iterated and potentially awaited.
 
 ```csharp
@@ -43,7 +43,7 @@ that can be iterated and potentially awaited.
 Schedule schedule = 
     Schedule.Spaced(TimeSpan.FromSeconds(2)) & Schedule.Recurs(5);
 
-// the schedule can be used in any way; its an IEnumerable<Duration>
+// the schedule can be used in any way; it's an IEnumerable<Duration>
 // so we can just foreach it and do the operation; awaiting the durations
 // after
 foreach(Duration duration in schedule)
@@ -59,7 +59,7 @@ There are many combinators which allow <xref:Eon.Schedule> to be composed out of
 simple building blocks reducing the need to extend <xref:Eon.Schedule>
 directly. Eon exposes many of these combinators, which are documented here.
 
-However if its required it is as simple as writing a custom
+However, if it's required, it is as simple as writing a custom
 <xref:System.Collections.Generic.IEnumerable`1> of <xref:Eon.Duration>.
 
 For more details/information keep reading the docs or have a look at the test

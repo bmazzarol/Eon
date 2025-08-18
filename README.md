@@ -31,7 +31,7 @@ comes paired with a simple language; crontab that is used to define how the
 job is to be repeated.
 
 Eon exposes a type called `Schedule`, that is a modern alternative
-to Cron, that is not concerned with how its executed, just the cadence at which
+to Cron, that is not concerned with how it's executed, just the cadence at which
 an execution engine could run it.
 
 It's an immutable blueprint; a potentially infinite stream of durations that
@@ -58,10 +58,10 @@ There are many combinators which allow Schedules to be composed out of simple
 building blocks reducing the need to extend Schedule directly. Eon
 exposes many of these combinators, which are documented here.
 
-However if it's required it is as simple as writing a custom `IEnumerator` of
+However, if it's required, it is as simple as writing a custom `IEnumerator` of
 `Duration`.
 
-For more details/information have a look a the test projects or create an issue.
+For more details/information have a look at the test projects or create an issue.
 
 ## Attributions
 

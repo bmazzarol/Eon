@@ -39,7 +39,7 @@ Its an immutable blueprint; a potentially infinite stream of <xref:Eon.Duration>
 that can be iterated and potentially awaited.
 
 ```csharp
-// defines a simple schedule that emmits 5 durations each 2 seconds long
+// defines a simple schedule that emits 5 durations each 2 seconds long
 Schedule schedule = 
     Schedule.Spaced(TimeSpan.FromSeconds(2)) & Schedule.Recurs(5);
 

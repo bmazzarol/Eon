@@ -6,7 +6,7 @@ public abstract partial record Schedule
         DateTimeOffset.UtcNow;
 
     /// <summary>
-    /// <see cref="Schedule"/> that will continue to emmit <see cref="Duration.Zero"/>
+    /// <see cref="Schedule"/> that will continue to emit <see cref="Duration.Zero"/>
     /// until `max` <see cref="Duration"/> has passed.
     /// </summary>
     /// <remarks>It behaves like a <see cref="Forever"/> with a deadline</remarks>
@@ -16,7 +16,7 @@ public abstract partial record Schedule
         new SchUpTo(max, currentTimeFunction);
 
     /// <summary>
-    /// <see cref="Schedule"/> that will continue to emmit <see cref="Duration.Zero"/>
+    /// <see cref="Schedule"/> that will continue to emit <see cref="Duration.Zero"/>
     /// until <see cref="Max"/> <see cref="Duration"/> has passed.
     /// </summary>
     private sealed record SchUpTo : Schedule

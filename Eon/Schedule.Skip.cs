@@ -8,7 +8,7 @@ public abstract partial record Schedule
     /// Skip `count` <see cref="Duration"/> from the `this` <see cref="Schedule"/>
     /// </summary>
     /// <remarks>If `count` is greater than the number of emissions from `this` <see cref="Schedule"/>
-    /// it will emmit nothing</remarks>
+    /// it will emit nothing</remarks>
     /// <param name="count">`count` emissions to skip</param>
     /// <returns><see cref="Schedule"/> with `count` <see cref="Duration"/> skipped</returns>
     public Schedule Skip(int count) => new SchSkip(this, count);

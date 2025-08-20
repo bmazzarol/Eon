@@ -5,12 +5,13 @@ namespace Eon;
 public abstract partial record Schedule
 {
     /// <summary>
-    /// Skip `count` <see cref="Duration"/> from the `this` <see cref="Schedule"/>
+    /// Skip <paramref name="count"/> <see cref="Duration"/> values from this <see cref="Schedule"/>.
     /// </summary>
-    /// <remarks>If `count` is greater than the number of emissions from `this` <see cref="Schedule"/>
-    /// it will emmit nothing</remarks>
-    /// <param name="count">`count` emissions to skip</param>
-    /// <returns><see cref="Schedule"/> with `count` <see cref="Duration"/> skipped</returns>
+    /// <remarks>
+    /// If <paramref name="count"/> is greater than the number of emissions from this <see cref="Schedule"/>, it emits nothing.
+    /// </remarks>
+    /// <param name="count">The number of emissions to skip.</param>
+    /// <returns>A <see cref="Schedule"/> with <paramref name="count"/> <see cref="Duration"/> values skipped.</returns>
     public Schedule Skip(int count) => new SchSkip(this, count);
 
     /// <summary>
@@ -19,12 +20,12 @@ public abstract partial record Schedule
     public Schedule Tail => new SchSkip(this, 1);
 
     /// <summary>
-    /// Skip <see cref="SkipOver"/> elements from <see cref="Schedule"/>.
-    /// If <see cref="Schedule"/> completes before <see cref="SkipOver"/> emissions
+    /// Skip <paramref name="SkipOver"/> emissions from the <see cref="Schedule"/>.
+    /// If the <see cref="Schedule"/> completes before <paramref name="SkipOver"/> emissions,
     /// it completes without emitting anything.
     /// </summary>
-    /// <param name="Schedule">schedule</param>
-    /// <param name="SkipOver">number of elements to take</param>
+    /// <param name="Schedule">The source schedule.</param>
+    /// <param name="SkipOver">The number of emissions to skip.</param>
     private sealed record SchSkip(Schedule Schedule, int SkipOver) : Schedule
     {
         public override int? Count =>

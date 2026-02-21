@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Eon.Docs/Eon.Docs.csproj" />
+  <Project Path="Eon.Tests/Eon.Tests.csproj" />
+  <Project Path="Eon/Eon.csproj" />
+</Solution>

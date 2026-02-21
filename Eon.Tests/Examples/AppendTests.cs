@@ -1,6 +1,5 @@
 ﻿using Docfx.ResultSnippets;
 using Eon.Tests.Extensions;
-using Humanizer;
 
 namespace Eon.Tests.Examples;
 

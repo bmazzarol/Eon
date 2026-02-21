@@ -1,5 +1,3 @@
-using System.Collections;
-
 namespace Eon.Tests;
 
 public static class ScheduleTests

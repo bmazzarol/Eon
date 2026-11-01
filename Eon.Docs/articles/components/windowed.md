@@ -6,7 +6,7 @@ and sleeps until the nearest window boundary every time it recurs.
 For example,
 
 ```csharp
-Schedule.Window(TimeSpan.FromSeconds(10));
+Schedule.Windowed(TimeSpan.FromSeconds(10));
 ```
 
 Produces,

@@ -1,23 +1,14 @@
-﻿<!-- markdownlint-disable MD033 MD041 -->
-<div align="center">
-
-<img src="schedule-icon.png" alt="Eon" width="150px"/>
+![Eon](schedule-icon.png)
 
 # Eon
 
-[:running: **_Getting Started_**](https://bmazzarol.github.io/Eon/articles/getting-started.html)
-|
-[:books: **_Documentation_**](https://bmazzarol.github.io/Eon)
+**Say when something should run, as data.**
 
-[![Nuget](https://img.shields.io/nuget/v/eon)](https://www.nuget.org/packages/eon/)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bmazzarol_Eon&metric=coverage)](https://sonarcloud.io/summary/new_code?id=bmazzarol_Eon)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bmazzarol_Eon&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=bmazzarol_Eon)
-[![CD Build](https://github.com/bmazzarol/eon/actions/workflows/cd-build.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/cd-build.yml)
-[![Check Markdown](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml)
+An immutable Schedule type: a potentially infinite stream of durations you can compose, iterate and await, with no execution engine attached.
 
-:watch: A Schedule type for C# and dotnet
+[![Nuget](https://img.shields.io/nuget/v/eon)](https://www.nuget.org/packages/eon/) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bmazzarol_Eon&metric=coverage)](https://sonarcloud.io/summary/new_code?id=bmazzarol_Eon) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bmazzarol_Eon&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=bmazzarol_Eon) [![CD Build](https://github.com/bmazzarol/Eon/actions/workflows/cd-build.yml/badge.svg)](https://github.com/bmazzarol/Eon/actions/workflows/cd-build.yml) [![Check Markdown](https://github.com/bmazzarol/Eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/Eon/actions/workflows/check-markdown.yml)
 
-</div>
+[:running: **_Getting Started_**](https://bmazzarol.github.io/Eon/articles/getting-started.html) | [:books: **_Documentation_**](https://bmazzarol.github.io/Eon/)
 
 ## Why?
 

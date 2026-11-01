@@ -1,24 +1,14 @@
-<!-- markdownlint-disable MD033 MD041 -->
-<div align="center">
-
-<img src="images/schedule-icon.png" alt="Eon" width="150px"/>
-
 # Eon
 
----
+![Eon](images/schedule-icon.png)
 
-[![Nuget](https://img.shields.io/nuget/v/eon)](https://www.nuget.org/packages/eon/)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bmazzarol_Eon&metric=coverage)](https://sonarcloud.io/summary/new_code?id=bmazzarol_Eon)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bmazzarol_Eon&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=bmazzarol_Eon)
-[![CD Build](https://github.com/bmazzarol/eon/actions/workflows/cd-build.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/cd-build.yml)
-[![Check Markdown](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/eon/actions/workflows/check-markdown.yml)
+**Say when something should run, as data.**
 
-:watch: A Schedule type for C# and dotnet
+An immutable Schedule type: a potentially infinite stream of durations you can compose, iterate and await, with no execution engine attached.
 
----
-
-</div>
-<!-- markdownlint-enable MD033 MD041 -->
+```shell
+dotnet add package eon
+```
 
 ## Why?
 

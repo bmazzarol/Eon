@@ -4,7 +4,7 @@
 > Before building a custom <xref:Eon.Schedule> consider using the existing
 > components and build them up via composition
 
-The recipe for building a <xref:Eon.Schedule> is simple.
+A custom <xref:Eon.Schedule> needs four members.
 
 1. Extend from <xref:Eon.Schedule>
 2. Implement the GetEnumerator method
@@ -15,8 +15,8 @@ The recipe for building a <xref:Eon.Schedule> is simple.
 > For <xref:Eon.Schedule> that are infinite CanCount is `false` and Count is
 > `null`
 
-First lets build a simple <xref:Eon.Schedule> that returns
-only odd natural numbers in seconds to a provided `max`.
+First, a <xref:Eon.Schedule> that returns
+only odd natural numbers in seconds up to a provided `max`.
 
 [!code-csharp[Example1](../../../Eon.Tests/Examples/CustomOddNumbers.cs#Example1)]
 

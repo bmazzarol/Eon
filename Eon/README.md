@@ -12,8 +12,8 @@ needed.
 
 The standard abstraction that many developers would be familiar with
 is [Cron](https://en.wikipedia.org/wiki/Cron). This is a job scheduler that
-comes paired with a simple language; crontab that is used to define how the
-job is to be repeated.
+comes paired with its own little language, crontab, that says how the job
+repeats.
 
 Eon exposes a type called `Schedule`, that is a modern alternative
 to Cron. It is not concerned with how it's executed; only the cadence at which
@@ -23,13 +23,12 @@ It's an immutable blueprint; a potentially infinite stream of durations that
 can be iterated and potentially awaited.
 
 ```csharp
-// defines a simple schedule that emits 5 durations each 2 seconds long
+// a schedule that emits 5 durations, each 2 seconds long
 Schedule schedule =
     Schedule.Spaced(TimeSpan.FromSeconds(2)) & Schedule.Recurs(5);
 
-// the schedule can be used in any way; it's an IEnumerable<Duration>
-// so we can just foreach it and do the operation; awaiting the durations
-// after
+// a Schedule is an IEnumerable<Duration>, so the work is a plain loop
+// and each duration is awaited after it
 foreach(Duration duration in schedule)
 {
     // some operation
@@ -39,11 +38,9 @@ foreach(Duration duration in schedule)
 }
 ```
 
-There are many combinators which allow Schedules to be composed out of simple
-building blocks reducing the need to extend Schedule directly. Eon
-exposes many of these combinators, which are documented here.
+Schedules are composed from combinators, so extending `Schedule` is rarely
+necessary. The combinators are documented on the site.
 
-However, if it's required, it is as simple as writing a custom `IEnumerator` of
-`Duration`.
+Where that is not enough, a custom `IEnumerator<Duration>` is all it takes.
 
 For more details/information have a look at the test projects or create an issue.

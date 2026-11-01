@@ -4,7 +4,7 @@
 
 **Say when something should run, as data.**
 
-An immutable Schedule type: a potentially infinite stream of durations you can compose, iterate and await, with no execution engine attached.
+A Schedule is a stream of durations. Compose it, iterate it, await it, and never start a thread.
 
 [![Nuget](https://img.shields.io/nuget/v/eon)](https://www.nuget.org/packages/eon/) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bmazzarol_Eon&metric=coverage)](https://sonarcloud.io/summary/new_code?id=bmazzarol_Eon) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bmazzarol_Eon&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=bmazzarol_Eon) [![CD Build](https://github.com/bmazzarol/Eon/actions/workflows/cd-build.yml/badge.svg)](https://github.com/bmazzarol/Eon/actions/workflows/cd-build.yml) [![Check Markdown](https://github.com/bmazzarol/Eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/Eon/actions/workflows/check-markdown.yml)
 

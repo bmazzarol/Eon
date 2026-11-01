@@ -4,12 +4,7 @@
 
 **Say when something should run, as data.**
 
-An immutable `Schedule`: a potentially infinite stream of durations you can
-compose, iterate and await, with no execution engine attached.
-
-[![Nuget](https://img.shields.io/nuget/v/eon)](https://www.nuget.org/packages/eon/) [![CD Build](https://github.com/bmazzarol/Eon/actions/workflows/cd-build.yml/badge.svg)](https://github.com/bmazzarol/Eon/actions/workflows/cd-build.yml) [![Check Markdown](https://github.com/bmazzarol/Eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/Eon/actions/workflows/check-markdown.yml)
-
-[:running: **_Getting Started_**](articles/getting-started.md) | [:books: **_Documentation_**](https://bmazzarol.github.io/Eon/)
+A Schedule is a stream of durations. Compose it, iterate it, await it, and never start a thread.
 
 ```shell
 dotnet add package eon

@@ -1,73 +1,104 @@
 # Getting Started
 
-To use this library, simply include `Eon.dll` in your project or
-grab
-it from [NuGet](https://www.nuget.org/packages/Eon/), and add
-this to the top of each `.cs` file that needs it:
+Add the package, then use `Eon` in the file that needs a schedule.
 
-```C#
+```shell
+dotnet add package eon
+```
+
+```c#
 using Eon;
 ```
 
-Now a <xref:Eon.Schedule> can be created.
+A schedule is a stream of durations. The shortest one that runs forever is,
 
-Lets start with a simple <xref:Eon.Schedule> that runs forever emitting
-<xref:Eon.Duration.Zero> values
-
-```csharp
+```c#
 Schedule forever = Schedule.Forever;
 ```
 
-A <xref:Eon.Schedule> implements <xref:System.Collections.Generic.IEnumerable`1>
-so can be iterated like any collection
+`Schedule` implements `IEnumerable<Duration>`, so it can be iterated like any
+collection, and each `Duration` can be awaited.
 
-```csharp
-foreach(Duration zero in forever)
+```c#
+foreach (Duration zero in forever.Take(3))
 {
-    await zero;        
+    await zero;   // Duration.Zero, so this returns immediately
 }
 ```
 
-The power of <xref:Eon.Schedule> is that new <xref:Eon.Schedule> can be built
-out of simpler <xref:Eon.Schedule>.
+## Build schedules from parts
 
-Lets create a <xref:Eon.Schedule> that runs 10 times, with a linear backoff to a
-max <xref:Eon.Duration>.
+Schedules are composed with two operators.
 
-```csharp
-Schedule custom = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(10) 
-                & Schedule.LessThan(TimeSpan.FromSeconds(5));
+`&` (intersect) takes the larger duration from each side and stops when either
+side ends.
+
+```c#
+Schedule linear = Schedule.Linear(TimeSpan.FromSeconds(1));
+
+Schedule custom = linear.Take(10) & Schedule.LessThan(TimeSpan.FromSeconds(5));
 ```
 
-This produces the following emissions, `1, 2, 3, 4, 5, 5, 5, 5, 5, 5`
+emits,
 
-This library exposes a large number of <xref:Eon.Schedule> `components` that can
-be used and composed to create new <xref:Eon.Schedule> combinations.
-
-The two main combinators are [Union (|)](xref:Eon.Schedule.Union*)
-and [Intersect (&)](xref:Eon.Schedule.Intersect*).
-
-Union can be used when you want the emissions from `either` <xref:Eon.Schedule>.
-
-It will take the `minimum` <xref:Eon.Duration> from either <xref:Eon.Schedule>
-and will only stop running when `both` <xref:Eon.Schedule> complete.
-
-```csharp
-Schedule custom = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(10)
-                | Schedule.Spaced(TimeSpan.FromSeconds(1)).Take(5)
+```text
+1, 2, 3, 4, 5, 5, 5, 5, 5, 5
 ```
 
-This will producer the following emissions, `1, 1, 1, 1, 1, 6, 7, 8, 9, 10`
+`|` (union) takes the smaller duration from each side and stops when both sides
+end.
 
-Intersect can be used when you want the emissions from `both`
-<xref:Eon.Schedule>.
-
-It will take the `maximum` <xref:Eon.Duration> from both <xref:Eon.Schedule>
-and will stop running when `any` <xref:Eon.Schedule> complete.
-
-```csharp
-Schedule custom = Schedule.Linear(TimeSpan.FromSeconds(1)).Take(10)
-                & Schedule.Spaced(TimeSpan.FromSeconds(5)).Take(10)
+```c#
+Schedule custom = linear.Take(10) | Schedule.Spaced(TimeSpan.FromSeconds(1)).Take(5);
 ```
 
-This will producer the following emissions, `5, 5, 5, 5, 5, 6, 7, 8, 9, 10`
+emits,
+
+```text
+1, 1, 1, 1, 1, 6, 7, 8, 9, 10
+```
+
+Intersecting with a spaced schedule gives the same cadence as the slower side
+until the faster one catches up.
+
+```c#
+Schedule custom = linear.Take(10) & Schedule.Spaced(TimeSpan.FromSeconds(5)).Take(10);
+```
+
+emits,
+
+```text
+5, 5, 5, 5, 5, 6, 7, 8, 9, 10
+```
+
+## Run a schedule
+
+Nothing in Eon executes code. A schedule only says when something should
+happen, so the consumer decides how to use it.
+
+```c#
+Schedule everyFiveSeconds = Schedule.Spaced(TimeSpan.FromSeconds(5)) & Schedule.Recurs(5);
+
+foreach (Duration duration in everyFiveSeconds)
+{
+    await DoWork();
+    await duration;   // waits five seconds
+}
+```\n
+emits five durations of five seconds,
+
+```text
+5, 5, 5, 5, 5
+```
+
+## What it does not do
+
+* It does not run anything. There is no scheduler, no thread, no timer
+* It does not parse cron expressions
+* A schedule can be infinite, so use `Take` or a bound when a finite stream is
+  needed
+
+## See also
+
+* [Build A Schedule](how-to/build-schedule.md) - composing components
+* [Schedule Components](components/toc.yml) - every combinator, with examples

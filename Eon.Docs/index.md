@@ -4,7 +4,12 @@
 
 **Say when something should run, as data.**
 
-An immutable Schedule type: a potentially infinite stream of durations you can compose, iterate and await, with no execution engine attached.
+An immutable `Schedule`: a potentially infinite stream of durations you can
+compose, iterate and await, with no execution engine attached.
+
+[![Nuget](https://img.shields.io/nuget/v/eon)](https://www.nuget.org/packages/eon/) [![CD Build](https://github.com/bmazzarol/Eon/actions/workflows/cd-build.yml/badge.svg)](https://github.com/bmazzarol/Eon/actions/workflows/cd-build.yml) [![Check Markdown](https://github.com/bmazzarol/Eon/actions/workflows/check-markdown.yml/badge.svg)](https://github.com/bmazzarol/Eon/actions/workflows/check-markdown.yml)
+
+[:running: **_Getting Started_**](articles/getting-started.md) | [:books: **_Documentation_**](https://bmazzarol.github.io/Eon/)
 
 ```shell
 dotnet add package eon
@@ -12,45 +17,39 @@ dotnet add package eon
 
 ## Why?
 
-Schedules are a common requirement when building software. Whenever you need
-some operation to repeat at some configured cadence, a way to encode that is
-needed.
+Anything that repeats on a cadence needs a way to describe that cadence. Cron
+is the familiar answer, but it is a scheduler with a text format attached, and
+the schedule cannot be inspected, composed or tested as a value.
 
-The standard abstraction that many developers would be familiar with
-is [Cron](https://en.wikipedia.org/wiki/Cron). This is a job scheduler that
-comes paired with a simple language; crontab that is used to define how the
-job is to be repeated.
+Eon makes the cadence a type. <xref:Eon.Schedule> is an
+`IEnumerable<Eon.Duration>`, so a schedule can be built from parts, enumerated,
+and awaited without any engine deciding when it runs.
 
-Eon exposes a type <xref:Eon.Schedule>, that is a modern alternative
-to Cron. It is not concerned with how it's executed; only the cadence at which
-an execution engine could run it.
+```c#
+// five durations, each two seconds long
+Schedule schedule = Schedule.Spaced(TimeSpan.FromSeconds(2)) & Schedule.Recurs(5);
 
-It's an immutable blueprint; a potentially infinite stream of <xref:Eon.Duration>
-that can be iterated and potentially awaited.
-
-```csharp
-// defines a simple schedule that emits 5 durations each 2 seconds long
-Schedule schedule = 
-    Schedule.Spaced(TimeSpan.FromSeconds(2)) & Schedule.Recurs(5);
-
-// the schedule can be used in any way; it's an IEnumerable<Duration>
-// so we can just foreach it and do the operation; awaiting the durations
-// after
-foreach(Duration duration in schedule)
+foreach (Duration duration in schedule)
 {
-    // some operation
     var result = await SomeService();
-    // now wait 2 seconds
-    await duration;
+    await duration;   // waits two seconds
 }
 ```
 
-There are many combinators which allow <xref:Eon.Schedule> to be composed out of
-simple building blocks reducing the need to extend <xref:Eon.Schedule>
-directly. Eon exposes many of these combinators, which are documented here.
+Combinators such as `Spaced`, `Recurs`, `Daily`, `Between` and `During` cover
+most cadences. Anything else is a custom `IEnumerable<Duration>`.
 
-However, if it's required, it is as simple as writing a custom
-<xref:System.Collections.Generic.IEnumerable{Eon.Duration}>.
+## What it does not do
 
-For more details/information keep reading the docs or have a look at the test
-projects or create an issue.
+* It does not run anything. There is no scheduler, timer or background thread;
+  Eon only says when something should happen
+* It does not parse cron expressions
+* It does not persist a schedule or react to the clock on its own
+
+## See also
+
+* [Getting Started](articles/getting-started.md) - install and run a schedule
+* [Schedule Components](articles/components/toc.yml) - the combinators that
+  build schedules
+* [Build a Schedule](articles/how-to/build-schedule.md) - compose schedules from
+  components
